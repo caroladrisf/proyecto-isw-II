@@ -16,6 +16,7 @@ class CreateClienteTable extends Migration
         Schema::table('cliente', function (Blueprint $table) {
             $table->increments('id');
             $table->foreign('id_contacto')->references('id')->on('contacto');
+            $table->timestamps();
         });
     }
 

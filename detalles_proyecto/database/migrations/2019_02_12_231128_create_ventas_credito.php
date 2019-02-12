@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTelefonosTable extends Migration
+class CreateVentasCredito extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTelefonosTable extends Migration
      */
     public function up()
     {
-        Schema::table('telefonos', function (Blueprint $table) {
+        Schema::table('ventas_credito', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('numero');
+            $table->foreing('id_cliente')->references('id')->on('cliente');
+            $table->double('saldo');
+            $table->date('fecha_compra')->default(now());
             $table->timestamps();
         });
     }
@@ -27,7 +29,7 @@ class CreateTelefonosTable extends Migration
      */
     public function down()
     {
-        Schema::table('telefonos', function (Blueprint $table) {
+        Schema::table('ventas_credito', function (Blueprint $table) {
             //
         });
     }
