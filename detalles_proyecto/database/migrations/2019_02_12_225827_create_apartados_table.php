@@ -17,7 +17,9 @@ class CreateApartadosTable extends Migration
             $table->increments('id');
             $table->integer('id_cliente');
             $table->double('saldo');
-            $table->date('fecha');
+            $table->date('fecha')->default(now());
+            $table->foreign('id_cliente')->references('id')->on('cliente');
+            $table->timestamps();
         });
     }
 

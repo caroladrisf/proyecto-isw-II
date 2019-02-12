@@ -21,6 +21,7 @@ class CreateAdminTable extends Migration
             $table->text('username');
             $table->text('password');
             $table->text('rol');
+            $table->timestamps();
         });
     }
 

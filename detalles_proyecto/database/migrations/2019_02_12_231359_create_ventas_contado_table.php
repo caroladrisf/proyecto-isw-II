@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticulosTable extends Migration
+class CreateVentasContadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateArticulosTable extends Migration
      */
     public function up()
     {
-        Schema::table('articulos', function (Blueprint $table) {
+        Schema::table('ventas_contado', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('descripcion');
-            $table->integer('cantidad');
-            $table->double('precio_compra');
-            $table->double('precio_venta');
+            $table->integer('id_cliente');
+            $table->double('total_compra');
+            $table->date('fecha_compra')->default(now());
+            $table->foreign('id_cliente')->references('id')->on('cliente');
             $table->timestamps();
         });
     }
@@ -30,7 +30,7 @@ class CreateArticulosTable extends Migration
      */
     public function down()
     {
-        Schema::table('articulos', function (Blueprint $table) {
+        Schema::table('ventas_contado', function (Blueprint $table) {
             //
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticulosTable extends Migration
+class CreateProveedoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateArticulosTable extends Migration
      */
     public function up()
     {
-        Schema::table('articulos', function (Blueprint $table) {
+        Schema::table('proveedores', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('descripcion');
-            $table->integer('cantidad');
-            $table->double('precio_compra');
-            $table->double('precio_venta');
-            $table->timestamps();
+            $table->integer('id_contacto');
+            $table->foreign('id_contacto')->references('id')->on('contacto');
         });
     }
 
@@ -30,7 +27,7 @@ class CreateArticulosTable extends Migration
      */
     public function down()
     {
-        Schema::table('articulos', function (Blueprint $table) {
+        Schema::table('proveedores', function (Blueprint $table) {
             //
         });
     }
