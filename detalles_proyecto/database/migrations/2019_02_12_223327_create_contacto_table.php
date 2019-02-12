@@ -21,6 +21,7 @@ class CreateContactoTable extends Migration
             $table->text('correo')->nullable();
             $table->text('direccion');
             $table->foreign('id_telefono')->references('id')->on('telefonos');
+            $table->timestamps();
 
         });
     }

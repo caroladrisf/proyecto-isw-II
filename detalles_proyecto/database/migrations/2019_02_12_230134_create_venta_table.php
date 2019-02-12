@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTelefonosTable extends Migration
+class CreateVentaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateTelefonosTable extends Migration
      */
     public function up()
     {
-        Schema::table('telefonos', function (Blueprint $table) {
+        Schema::table('venta', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('numero');
+            $table->foreign('id_articulo')->references('id')->on('articulos');
+            $table->integer('cantidad');
+            $table->integer('tipo');
+            $table->integer('id_tipo');
             $table->timestamps();
         });
     }
@@ -27,7 +30,7 @@ class CreateTelefonosTable extends Migration
      */
     public function down()
     {
-        Schema::table('telefonos', function (Blueprint $table) {
+        Schema::table('venta', function (Blueprint $table) {
             //
         });
     }
