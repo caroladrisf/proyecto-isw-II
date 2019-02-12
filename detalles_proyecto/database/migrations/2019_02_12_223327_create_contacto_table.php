@@ -13,7 +13,7 @@ class CreateContactoTable extends Migration
      */
     public function up()
     {
-        Schema::table('contacto', function (Blueprint $table) {
+        Schema::create('contacto', function (Blueprint $table) {
             $table->increments('id');
             $table->text('nombre');
             $table->text('apellido')->nullable();

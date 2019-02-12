@@ -13,7 +13,7 @@ class CreateClienteTable extends Migration
      */
     public function up()
     {
-        Schema::table('cliente', function (Blueprint $table) {
+        Schema::create('cliente', function (Blueprint $table) {
             $table->increments('id');
             $table->foreign('id_contacto')->references('id')->on('contacto');
             $table->timestamps();

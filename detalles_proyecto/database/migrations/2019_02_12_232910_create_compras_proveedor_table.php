@@ -13,7 +13,7 @@ class CreateComprasProveedorTable extends Migration
      */
     public function up()
     {
-        Schema::table('compras_proveedor', function (Blueprint $table) {
+        Schema::create('compras_proveedor', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_proveedor');
             $table->integer('id_articulo');

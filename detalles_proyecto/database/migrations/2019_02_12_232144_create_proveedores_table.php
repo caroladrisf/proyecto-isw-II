@@ -13,7 +13,7 @@ class CreateProveedoresTable extends Migration
      */
     public function up()
     {
-        Schema::table('proveedores', function (Blueprint $table) {
+        Schema::create('proveedores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_contacto');
             $table->foreign('id_contacto')->references('id')->on('contacto');

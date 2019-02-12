@@ -13,7 +13,7 @@ class CreateArticulosTable extends Migration
      */
     public function up()
     {
-        Schema::table('articulos', function (Blueprint $table) {
+        Schema::create('articulos', function (Blueprint $table) {
             $table->increments('id');
             $table->text('descripcion');
             $table->integer('cantidad');

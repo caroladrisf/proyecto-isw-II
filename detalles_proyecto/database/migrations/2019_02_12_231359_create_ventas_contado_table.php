@@ -13,7 +13,7 @@ class CreateVentasContadoTable extends Migration
      */
     public function up()
     {
-        Schema::table('ventas_contado', function (Blueprint $table) {
+        Schema::create('ventas_contado', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cliente');
             $table->double('total_compra');

@@ -13,7 +13,7 @@ class CreateVentaTable extends Migration
      */
     public function up()
     {
-        Schema::table('venta', function (Blueprint $table) {
+        Schema::create('venta', function (Blueprint $table) {
             $table->increments('id');
             $table->foreign('id_articulo')->references('id')->on('articulos');
             $table->integer('cantidad');

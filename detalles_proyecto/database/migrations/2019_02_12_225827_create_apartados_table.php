@@ -13,7 +13,7 @@ class CreateApartadosTable extends Migration
      */
     public function up()
     {
-        Schema::table('apartados', function (Blueprint $table) {
+        Schema::create('apartados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cliente');
             $table->double('saldo');

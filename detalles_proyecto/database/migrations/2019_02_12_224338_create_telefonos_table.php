@@ -13,7 +13,7 @@ class CreateTelefonosTable extends Migration
      */
     public function up()
     {
-        Schema::table('telefonos', function (Blueprint $table) {
+        Schema::create('telefonos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('numero');
             $table->timestamps();

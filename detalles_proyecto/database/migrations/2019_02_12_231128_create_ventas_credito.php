@@ -13,7 +13,7 @@ class CreateVentasCredito extends Migration
      */
     public function up()
     {
-        Schema::table('ventas_credito', function (Blueprint $table) {
+        Schema::create('ventas_credito', function (Blueprint $table) {
             $table->increments('id');
             $table->foreing('id_cliente')->references('id')->on('cliente');
             $table->double('saldo');

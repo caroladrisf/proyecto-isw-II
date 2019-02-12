@@ -13,7 +13,7 @@ class CreateAbonosTable extends Migration
      */
     public function up()
     {
-        Schema::table('abonos', function (Blueprint $table) {
+        Schema::create('abonos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_tipo');
             $table->integer('abono');
