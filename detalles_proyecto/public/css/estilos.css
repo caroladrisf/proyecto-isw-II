@@ -1,0 +1,41 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+}
+
+#login {
+    margin-top: 50vh;
+    transform: translate(0%, -65%);
+    width: 500px;
+    border: none;
+}
+
+#custom .card-header,
+#login .card-header {
+    background-color: #26a69a;
+}
+
+#custom .btn-primary,
+#login .btn-primary {
+    background-color: #26a69a;
+    border: none;
+    color: #fff;
+}
+
+#custom .btn {
+    border: none;
+    color: #fff;
+}
+
+#login h3,
+#custom h5 {
+    color: #fff;
+}
+
+#custom .btn-primary:hover {
+    background-color: #26a69a;
+}
+
+#login .btn-primary:hover {
+    background-color: #26a69a;
+}
