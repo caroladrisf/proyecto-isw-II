@@ -17,12 +17,11 @@ class CreateContactoTable extends Migration
             $table->increments('id');
             $table->text('nombre');
             $table->text('apellido')->nullable();
-            $table->text('id_telefono')->nullable();
+            $table->integer('id_telefono')->nullable();
             $table->text('correo')->nullable();
             $table->text('direccion');
             $table->foreign('id_telefono')->references('id')->on('telefonos');
             $table->timestamps();
-
         });
     }
 
@@ -33,8 +32,6 @@ class CreateContactoTable extends Migration
      */
     public function down()
     {
-        Schema::table('contacto', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('contacto');
     }
 }

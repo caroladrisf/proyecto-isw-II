@@ -30,8 +30,6 @@ class CreateApartadosTable extends Migration
      */
     public function down()
     {
-        Schema::table('apartados', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('apartados');
     }
 }
