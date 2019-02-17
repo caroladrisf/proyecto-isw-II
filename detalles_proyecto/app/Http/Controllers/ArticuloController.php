@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Articulo;
 
 class ArticuloController extends Controller
 {
@@ -13,7 +14,8 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        return view('articulos.index');
+        $articulos = Articulo::all();
+        return view('articulos.index', compact('articulos'));
     }
 
     /**
@@ -34,7 +36,11 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $articulo = new Articulo();
+        $articulo->fill($request->all());
+        $articulo->save();
+        
+        return redirect('/articulos');
     }
 
     /**
@@ -45,7 +51,7 @@ class ArticuloController extends Controller
      */
     public function show($id)
     {
-        return "show articulo $id del articulo controller";
+        //
     }
 
     /**
