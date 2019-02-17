@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contacto;
 
-class ClienteController extends Controller
+class ContactoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        return view('contactos.index');
     }
 
     /**
@@ -22,6 +24,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
+        return view('contactos.create');
     }
 
     /**
@@ -32,7 +35,10 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $contacto = new Contacto();
+        $contacto->fill($request->all());
+        $contacto->save();
+        return redirect('/contactos');
     }
 
     /**

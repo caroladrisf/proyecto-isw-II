@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 Route::resources([
     'articulos' => 'ArticuloController',
-    'clientes' => 'ClienteController'
+    'contactos' => 'ContactoController'
 ]);

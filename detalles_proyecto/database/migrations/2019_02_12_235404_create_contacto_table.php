@@ -15,11 +15,12 @@ class CreateContactoTable extends Migration
     {
         Schema::create('contacto', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tipo_contacto');
             $table->text('nombre');
             $table->text('apellido')->nullable();
-            $table->integer('id_telefono')->nullable();
             $table->text('correo')->nullable();
             $table->text('direccion');
+            $table->integer('id_telefono')->nullable();
             $table->foreign('id_telefono')->references('id')->on('telefonos');
             $table->timestamps();
         });

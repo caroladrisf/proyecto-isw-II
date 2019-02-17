@@ -5,11 +5,11 @@
     <div class="col-sm-8">
         <div class="card border-light mx-auto " id="custom">
             <div class="text-center w-50 mx-auto pt-2">
-                <a href="#" class="btn btn-primary btn-block"><strong>Agregar cliente</strong></a>
+                <a href="#" class="btn btn-primary btn-block"><strong>Agregar contacto</strong></a>
             </div>
             <br>        
             <div class="card-header text-center">
-                <h5>Clientes</h5>
+                <h5>Contactos</h5>
             </div>
             <div class="container">
                 <form action="">
@@ -23,6 +23,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
+                            <th scope="col">TIPO</th>
                             <th scope="col">NOMBRE</th>
                             <th scope="col">APELLIDO</th>
                             <th scope="col">CORREO</th>
