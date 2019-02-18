@@ -5,7 +5,7 @@
     <div class="col-sm-8">
         <div class="card border-light mx-auto " id="custom">
             <div class="text-center w-50 mx-auto pt-2">
-                <a href="#" class="btn btn-primary btn-block"><strong>Agregar contacto</strong></a>
+                <a href="{{ url('contactos/create') }}" class="btn btn-primary btn-block"><strong>Agregar contacto</strong></a>
             </div>
             <br>        
             <div class="card-header text-center">
@@ -27,12 +27,38 @@
                             <th scope="col">NOMBRE</th>
                             <th scope="col">APELLIDO</th>
                             <th scope="col">CORREO</th>
-                            <th scope="col">TELÉFONO</th>
                             <th scope="col">DIRECCIÓN</th>
+                            <th scope="col">TELÉFONO</th>
+                            <th scope="col">OPCIONES <i class="fas fa-cog"></i></th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    @foreach($contactos as $contacto)
+                        <tbody>
+                            <tr class="text-center">
+                                <td>{{$contacto->id}}</td>
+                                @if ($contacto->tipo_contacto==1)
+                                    <td>Cliente</td>
+                                @else
+                                    <td>Proveedor</td>
+                                @endif
+                                <td>{{$contacto->nombre}}</td>
+                                <td>{{$contacto->apellido}}</td>
+                                <td>{{$contacto->correo}}</td>
+                                <td>{{$contacto->direccion}}</td>
+                                <td>{{$contacto->numero}}</td>
+                                <td>
+                                    <div class="row ml-5">
+                                        <a href="{{ action('ContactoController@edit', $contacto->id) }}" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                                        <form action="{{ action('ContactoController@destroy', $contacto->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endforeach
                 </table>
             </div>
         </div>

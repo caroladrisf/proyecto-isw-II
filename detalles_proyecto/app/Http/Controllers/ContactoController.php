@@ -16,7 +16,8 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        return view('contactos.index');
+        $contactos = DB::table('contacto')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')->select('contacto.*', 'telefonos.numero')->get();
+        return view('contactos.index', compact('contactos'));
     }
 
     /**
