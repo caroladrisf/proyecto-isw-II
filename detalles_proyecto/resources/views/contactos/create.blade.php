@@ -19,11 +19,11 @@
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" value="{{ old('nombre') }}" class="form-control" placeholder="Nombre" name="nombre_cliente">
+                        <input type="text" value="{{ old('nombre') }}" class="form-control" placeholder="Nombre" name="nombre">
                     </div>
                     <div class="form-group">
                         <label>Apellido</label>
-                        <input type="text" value="{{ old('apellido') }}" class="form-control" placeholder="Apellido" name="apellido_cliente">
+                        <input type="text" value="{{ old('apellido') }}" class="form-control" placeholder="Apellido" name="apellido">
                     </div>
                     <div class="form-group">
                         <label>Correo</label>

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Contacto;
-use App\Telefono;
 
-class ContactoController extends Controller
+class TelefonoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        return view('contactos.index');
+        //
     }
 
     /**
@@ -26,7 +23,7 @@ class ContactoController extends Controller
      */
     public function create()
     {
-        return view('contactos.create');
+        //
     }
 
     /**
@@ -37,22 +34,7 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
-        $telefono = new Telefono();
-        $contacto = new Contacto();
-        $telefono->numero = $request->input('numero');
-        $id_telefono = DB::table('telefonos')->insertGetId(['numero'=>"$telefono->numero"]);
-        echo $id_telefono;
-        $contacto->fill($request->all());
-        $contacto->id_telefono = $id_telefono;
-        $contacto = DB::table('contacto')->insert(
-            ['tipo_contacto'=>"$contacto->tipo_contacto",
-            'nombre'=>"$contacto->nombre",
-            'apellido'=>"$contacto->apellido",
-            'correo'=>"$contacto->correo",
-            'direccion'=>"$contacto->direccion",
-            'id_telefono'=>"$contacto->id_telefono",
-            ]);
-        return redirect('/contactos');
+        //
     }
 
     /**
