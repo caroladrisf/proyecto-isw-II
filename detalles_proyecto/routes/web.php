@@ -19,3 +19,4 @@ Route::resources([
     'articulos' => 'ArticuloController',
     'contactos' => 'ContactoController'
 ]);
+

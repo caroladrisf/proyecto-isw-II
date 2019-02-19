@@ -75,7 +75,8 @@ class ContactoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contacto = DB::table('contacto')->where('contacto.id', '=', "$id")->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')->select('contacto.*', 'telefonos.numero')->get();
+        return view('contactos.edit', compact('contacto'));
     }
 
     /**
@@ -87,7 +88,7 @@ class ContactoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('contacto')->where('id', $id)->update($request);
     }
 
     /**
