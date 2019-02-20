@@ -8,8 +8,8 @@
                 <h5>Editar contacto</h5>
             </div>
             <div class="p-4 shadow">
-                <form class="form-group" action="{{ action('ContactoController@store') }}" method="POST">
-                    @method('PUT')
+            <form class="form-group" action="/contactos/{{$contacto[0]->id}}" method="POST">
+                    @method('PATCH')
                     @csrf
                     <div class="form-group">
                         <label>Tipo Contacto</label>

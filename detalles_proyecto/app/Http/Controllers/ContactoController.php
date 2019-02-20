@@ -16,7 +16,8 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contactos = DB::table('contacto')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')->select('contacto.*', 'telefonos.numero')->get();
+        $contactos = DB::table('contacto')->orderBy('contacto.id', 'asc')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')
+        ->select('contacto.*', 'telefonos.numero')->get();
         return view('contactos.index', compact('contactos'));
     }
 
@@ -88,7 +89,14 @@ class ContactoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('contacto')->where('id', $id)->update($request);
+        $id_telefono = DB::table('contacto')->where('id', $id)->pluck('id_telefono');
+        DB::table('telefonos')->where('id', $id_telefono[0])->update(['numero'=>$request->numero]);
+        DB::table('contacto')->where('id', $id)->update(['tipo_contacto'=>"$request->tipo_contacto",
+                                    'nombre'=>"$request->nombre",
+                                    'apellido'=>"$request->apellido",
+                                    'correo'=>"$request->correo",
+                                    'direccion'=>"$request->direccion"]);
+        return redirect('/contactos');
     }
 
     /**
