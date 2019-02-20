@@ -107,6 +107,7 @@ class ContactoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('contacto')->where('id', $id)->delete();
+        return redirect('/contactos');
     }
 }
