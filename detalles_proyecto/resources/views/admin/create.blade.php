@@ -36,10 +36,10 @@
                     </div>
                     <div class="form-group">
                         <label>Rol de Administrador</label> <br>
-                        <input type="checkbox" name="rol1" value="1">&nbspAdministrador (Acceso total) <br>
-                        <input type="checkbox" name="rol2" value="2">&nbspSolo clientes <br>
-                        <input type="checkbox" name="rol3" value="3">&nbspSolo inventarios <br>
-                        <input type="checkbox" name="rol4" value="4">&nbspSolo ventas <br>
+                        <input type="checkbox" name="rol-1" value="1">&nbspAdministrador (Acceso total) <br>
+                        <input type="checkbox" name="rol-2" value="2">&nbspSolo clientes <br>
+                        <input type="checkbox" name="rol-3" value="3">&nbspSolo inventarios <br>
+                        <input type="checkbox" name="rol-4" value="4">&nbspSolo ventas <br>
                     </div>
                     <div class="text-center w-50 mx-auto pt-2">
                         <button type="submit" class="btn btn-primary btn-block"><strong>Agregar</strong></button>

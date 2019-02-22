@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Admin;
 
@@ -35,10 +36,22 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $admin = new Admin();
-        dd($request);
+        $tipo_rol_1= $request->input('rol-1') ?? '';
+        $tipo_rol_2= $request->input('rol-2') ?? '';
+        $tipo_rol_3= $request->input('rol-3') ?? '';
+        $tipo_rol_4= $request->input('rol-4') ?? '';
+        $roles = $tipo_rol_1.','.$tipo_rol_2.','.$tipo_rol_3.','.$tipo_rol_4;
+        $admin->rol = $roles;
         $admin->fill($request->all());
-        //$admin->save();
-        //return redirect('/admin');
+        $admin = DB::table('admin')->insert([
+            'nombre'=>"$admin->nombre",
+            'apellido'=>"$admin->apellido",
+            'correo'=>"$admin->correo",
+            'username'=>"$admin->username",
+            'password'=>"$admin->password",
+            'rol'=>"$admin->rol"
+        ]);
+        return redirect('/admin');
     }
 
     /**
