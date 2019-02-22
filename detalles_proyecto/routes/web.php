@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', 'AdminController@login')->name('login');
+Route::post('/admin/session', 'AdminController@session');
+
+
 Route::resources([
     'articulos' => 'ArticuloController',
     'contactos' => 'ContactoController'
