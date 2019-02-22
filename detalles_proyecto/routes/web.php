@@ -21,5 +21,7 @@ Route::post('/admin/session', 'AdminController@session');
 
 Route::resources([
     'articulos' => 'ArticuloController',
-    'contactos' => 'ContactoController'
+    'contactos' => 'ContactoController',
+    'admin' => 'AdminController'
 ]);
+

@@ -16,7 +16,8 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contactos = DB::table('contacto')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')->select('contacto.*', 'telefonos.numero')->get();
+        $contactos = DB::table('contacto')->orderBy('contacto.id', 'asc')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')
+        ->select('contacto.*', 'telefonos.numero')->paginate(6);
         return view('contactos.index', compact('contactos'));
     }
 
@@ -42,7 +43,6 @@ class ContactoController extends Controller
         $contacto = new Contacto();
         $telefono->numero = $request->input('numero');
         $id_telefono = DB::table('telefonos')->insertGetId(['numero'=>"$telefono->numero"]);
-        echo $id_telefono;
         $contacto->fill($request->all());
         $contacto->id_telefono = $id_telefono;
         $contacto = DB::table('contacto')->insert(
@@ -75,7 +75,8 @@ class ContactoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contacto = DB::table('contacto')->where('contacto.id', '=', "$id")->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')->select('contacto.*', 'telefonos.numero')->get();
+        return view('contactos.edit', compact('contacto'));
     }
 
     /**
@@ -87,7 +88,14 @@ class ContactoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id_telefono = DB::table('contacto')->where('id', $id)->pluck('id_telefono');
+        DB::table('telefonos')->where('id', $id_telefono[0])->update(['numero'=>$request->numero]);
+        DB::table('contacto')->where('id', $id)->update(['tipo_contacto'=>"$request->tipo_contacto",
+                                    'nombre'=>"$request->nombre",
+                                    'apellido'=>"$request->apellido",
+                                    'correo'=>"$request->correo",
+                                    'direccion'=>"$request->direccion"]);
+        return redirect('/contactos');
     }
 
     /**
@@ -98,6 +106,7 @@ class ContactoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('contacto')->where('id', $id)->delete();
+        return redirect('/contactos');
     }
 }
