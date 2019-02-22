@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', 'AdminController@login')->name('login');
+// Rutas de iniciar y cerrar sesión
+Route::get('/admin/session', 'AdminController@login')->name('login');
 Route::post('/admin/session', 'AdminController@session');
+Route::get('/logout', 'AdminController@logout')->name('logout');
 
 
 Route::resources([
