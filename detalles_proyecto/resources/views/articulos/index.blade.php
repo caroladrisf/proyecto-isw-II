@@ -9,6 +9,16 @@
             <div class="card-header text-center">
                 <h5>Listado de artículos</h5>
             </div>
+            <div class="card-body" style="padding: 0rem 1rem">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div>
                 <table class="table table-sm table-hover table-bordered shadow">
                     <thead>
@@ -30,8 +40,9 @@
                             <td>₡ {{ $articulo['precio_compra'] }}</td>
                             <td>₡ {{ $articulo['precio_venta'] }}</td>
                             <td>
-                                <div class="row ml-5">
-                                    <a href="{{ action('ArticuloController@edit', $articulo['id']) }}" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                                <div class="row ml-4">
+                                    <a href="{{ action('ArticuloController@edit', $articulo['id']) }}" class="btn btn-info"><i
+                                            class="fas fa-pen"></i></a>
                                     <form action="{{ action('ArticuloController@destroy', $articulo['id']) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -43,6 +54,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $articulos->links() }}
                 <div class="text-center w-50 mx-auto pt-2">
                     <a href="{{ url('articulos/create') }}" class="btn btn-primary btn-block"><strong>Agregar artículo</strong></a>
                 </div>

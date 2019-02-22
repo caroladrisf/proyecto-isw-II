@@ -98,4 +98,24 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function login() {
+        return view('auth.login');
+    }
+
+    public function session(Request $req) {
+        $admin = Admin::where('username', 'like', $req->username)
+                        ->orWhere('correo', 'like', $req->username)->first();
+        if ($admin) {
+            if ($admin->password == $req->password) {
+                $req->session()->put('usuario', $admin->id);
+                return redirect('/');
+            }
+        }
+    }
+
+    public function logout(Request $req) {
+        $req->session()->flush();
+        return redirect('/');
+    }
 }
