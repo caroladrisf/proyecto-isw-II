@@ -17,7 +17,7 @@ class ContactoController extends Controller
     public function index()
     {
         $contactos = DB::table('contacto')->orderBy('contacto.id', 'asc')->join('telefonos', 'contacto.id_telefono', '=', 'telefonos.id')
-        ->select('contacto.*', 'telefonos.numero')->get();
+        ->select('contacto.*', 'telefonos.numero')->paginate(6);
         return view('contactos.index', compact('contactos'));
     }
 
@@ -43,7 +43,6 @@ class ContactoController extends Controller
         $contacto = new Contacto();
         $telefono->numero = $request->input('numero');
         $id_telefono = DB::table('telefonos')->insertGetId(['numero'=>"$telefono->numero"]);
-        echo $id_telefono;
         $contacto->fill($request->all());
         $contacto->id_telefono = $id_telefono;
         $contacto = DB::table('contacto')->insert(

@@ -3,19 +3,16 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
-        <div class="card border-light mx-auto " id="custom">
-            <div class="text-center w-50 mx-auto pt-2">
-                <a href="{{ url('contactos/create') }}" class="btn btn-primary btn-block"><strong>Agregar contacto</strong></a>
-            </div>
-            <br>        
+        <div class="card border-light mx-auto " id="custom">     
             <div class="card-header text-center">
                 <h5>Contactos</h5>
             </div>
             <div class="container">
-                <form action="">
-                    <div class="col-sm-2"></div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" name="" id="">
-                    <div class="col-sm-2"></div>
+                <form action="" class="form-inline input-group">
+                    <input class="form-control" type="text" placeholder="Buscar" name="" id="">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
                 </form>            
             </div>
             <div>
@@ -60,6 +57,10 @@
                         </tbody>
                     @endforeach
                 </table>
+                {{$contactos->links()}}
+                <div class="text-center w-50 mx-auto pt-2">
+                    <a href="{{ url('contactos/create') }}" class="btn btn-primary btn-block"><strong>Agregar contacto</strong></a>
+                </div>
             </div>
         </div>
     </div>
