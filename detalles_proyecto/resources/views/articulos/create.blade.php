@@ -10,6 +10,15 @@
                 <h5>Agregar artículo</h5>
             </div>
             <div class="p-4 shadow">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ action('ArticuloController@store') }}" method="POST">
                 @csrf
                     <div class="form-group">
