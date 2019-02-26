@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ArticuloRequest;
 use App\Articulo;
 
 class ArticuloController extends Controller
@@ -13,10 +14,22 @@ class ArticuloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articulos = Articulo::paginate(6);
-        return view('articulos.index', compact('articulos'));
+        $search_result = false;
+        $query = $request->query('buscar');
+        if ($query) {
+            $articulos = $this->search($query);
+            $search_result = true;
+        } else {
+            $articulos = Articulo::paginate(6);
+        }
+        return view('articulos.index', compact('articulos', 'search_result'));
+    }
+
+    private function search($query)
+    {
+        return DB::table('articulos')->where('descripcion', 'ilike', $query . '%')->get();
     }
 
     /**
@@ -32,15 +45,14 @@ class ArticuloController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreArticulo  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticuloRequest $request)
     {
         $articulo = new Articulo();
         $articulo->fill($request->all());
         $articulo->save();
-        
         return redirect('/articulos');
     }
 
@@ -61,9 +73,9 @@ class ArticuloController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Articulo $articulo)
     {
-        //
+        return view('articulos.edit', compact('articulo'));
     }
 
     /**
@@ -73,9 +85,11 @@ class ArticuloController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticuloRequest $request, Articulo $articulo)
     {
-        //
+        $articulo->fill($request->all());
+        $articulo->update();
+        return redirect('/articulos');
     }
 
     /**
@@ -84,8 +98,9 @@ class ArticuloController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Articulo $articulo)
     {
-        //
+        $articulo->delete();
+        return redirect('/articulos');
     }
 }

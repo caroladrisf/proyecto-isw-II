@@ -10,9 +10,9 @@
                 <h5>Listado de artículos</h5>
             </div>
             <div class="card-body" style="padding: 0rem 1rem">
-                <form action="">
+                <form action="{{ action('ArticuloController@index') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar">
+                        <input type="text" class="form-control" name="buscar" placeholder="Buscar">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
@@ -54,7 +54,9 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $articulos->links() }}
+                @if (!$search_result)
+                    {{ $articulos->links() }}
+                @endif
                 <div class="text-center w-50 mx-auto pt-2">
                     <a href="{{ url('articulos/create') }}" class="btn btn-primary btn-block"><strong>Agregar artículo</strong></a>
                 </div>
