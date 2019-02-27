@@ -2,10 +2,9 @@
 
 @section('content')
 
-<div class="container">
-    <div class="card mx-auto" style="max-width: 600px">
-        <div class="card-header text-center">
-            <h5>LOGIN</h5>
+    <div class="card border-light mx-auto shadow" id="login">
+        <div class="card-header text-center pt-4">
+            <h3>LOGIN</h3>
         </div>
         <div class="card-body">
             <form action="{{ action('AdminController@session') }}" method="POST">
@@ -18,10 +17,11 @@
                     <label>Contraseña</label>
                     <input type="password" name="password" class="form-control" placeholder="Contraseña">
                 </div>
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <div class="text-center w-50 mx-auto pt-2">
+                    <button type="submit" class="btn btn-primary btn-block"><strong>Ingresar</strong></button>
+                </div>
             </form>
         </div>
     </div>
-</div>
 
 @endsection

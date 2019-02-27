@@ -20,6 +20,15 @@
                     <a class="nav-link" href="{{ url('/contactos') }}">Clientes</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#">Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/contactos') }}">Proveedores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/create') }}">Registro</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Cerrar sesión</a>
                 </li>
                 @endif
