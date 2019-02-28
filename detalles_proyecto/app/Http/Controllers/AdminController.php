@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Admin;
 
 class AdminController extends Controller
@@ -100,17 +101,17 @@ class AdminController extends Controller
     }
 
     public function login() {
-        return view('auth.login');
+        return view('admin.login');
     }
 
-    public function session(Request $req) {
-        $admin = Admin::where('username', 'like', $req->username)
-                        ->orWhere('correo', 'like', $req->username)->first();
-        if ($admin) {
-            if ($admin->password == $req->password) {
-                $req->session()->put('usuario', $admin->id);
-                return redirect('/');
-            }
+    public function session(LoginRequest $req) {
+        $admin = Admin::where('username', 'like', $req->username)->first();
+        if ($admin->password == $req->password) {
+            $req->session()->put('usuario', $admin->id);
+            return redirect('/');
+        } else {
+            return back()->withErrors(['message' => 'Usuario o contraseña incorrecto'])
+                         ->withInput(request(['username']));
         }
     }
 
