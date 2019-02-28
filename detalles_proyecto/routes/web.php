@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('admin');
 
 // Rutas de iniciar y cerrar sesión
 Route::get('/admin/session', 'AdminController@login')->name('login');
@@ -25,5 +25,5 @@ Route::resources([
     'articulos' => 'ArticuloController',
     'contactos' => 'ContactoController',
     'admin' => 'AdminController'
-]);
+]/* , ['middleware' => ['admin']] */);
 
