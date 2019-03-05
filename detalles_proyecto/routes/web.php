@@ -24,6 +24,7 @@ Route::get('/logout', 'AdminController@logout')->name('logout');
 Route::resources([
     'articulos' => 'ArticuloController',
     'contactos' => 'ContactoController',
-    'admin' => 'AdminController'
+    'admin' => 'AdminController',
+    'debitos' => 'VentaDebitoController'
 ]/* , ['middleware' => ['admin']] */);
 
