@@ -9,7 +9,7 @@
             </div>
             <div class="shadow pb-3">
                 <div class="p-4">
-                    <form action="" method="POST">
+                    <form action="" method="GET">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Cliente</label>
                             <div class="col-sm-8">
@@ -49,7 +49,7 @@
                             <label class="col-sm-2 col-form-label">Cantidad</label>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" name="cantidad">
                                     <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary">
                                                 <i class="fas fa-search"></i>
@@ -62,6 +62,28 @@
                                     <button class="btn btn-primary">Agregar a venta</button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <table class="table table-sm table-hover table-bordered shadow">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col"><i class="fas fa-cog"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </form>
                 </div>
