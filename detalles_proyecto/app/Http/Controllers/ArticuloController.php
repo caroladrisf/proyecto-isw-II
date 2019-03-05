@@ -16,20 +16,14 @@ class ArticuloController extends Controller
      */
     public function index(Request $request)
     {
-        $search_result = false;
         $query = $request->query('buscar');
         if ($query) {
-            $articulos = $this->search($query);
-            $search_result = true;
+            $articulos = Articulo::where('descripcion', 'like', '%' . $query . '%')
+            ->orderBy('id', 'asc')->paginate(6);
         } else {
-            $articulos = Articulo::paginate(6);
+            $articulos = Articulo::orderBy('id', 'asc')->orderBy('id', 'asc')->paginate(6);
         }
-        return view('articulos.index', compact('articulos', 'search_result'));
-    }
-
-    private function search($query)
-    {
-        return DB::table('articulos')->where('descripcion', 'ilike', $query . '%')->get();
+        return view('articulos.index', compact('articulos'));
     }
 
     /**

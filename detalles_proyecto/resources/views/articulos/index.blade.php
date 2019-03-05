@@ -58,9 +58,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        @if (!$search_result)
         {{ $articulos->links() }}
-        @endif
     </div>
 </div>
 
