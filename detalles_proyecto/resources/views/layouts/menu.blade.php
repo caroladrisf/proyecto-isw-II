@@ -19,8 +19,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/contactos') }}">Clientes</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ventasDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Ventas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="ventasDropdown">
+                        <a class="dropdown-item" href="{{ url('/ventas/contados') }}">Contado</a>
+                        <a class="dropdown-item" href="{{ url('/ventas/creditos') }}">Crédito</a>
+                        <a class="dropdown-item" href="{{ url('/ventas/apartados') }}">Apartado</a>
+                    </div>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ventas</a>
+                    <a class="nav-link" href="{{ url('/abonos') }}">Abonos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/contactos') }}">Proveedores</a>
