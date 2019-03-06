@@ -20,6 +20,11 @@ Route::get('/admin/session', 'AdminController@login')->name('login');
 Route::post('/admin/session', 'AdminController@session');
 Route::get('/logout', 'AdminController@logout')->name('logout');
 
+// Rutas de ventas a crédito
+Route::get('/ventas/creditos', 'VentaCreditoController@create')->middleware('admin');
+Route::post('/ventas/creditos/clientes', 'VentaCreditoController@buscarCliente')
+->middleware('admin');
+Route::get('/ventas/cliente', 'ContactoController@search');
 
 Route::resources([
     'articulos' => 'ArticuloController',

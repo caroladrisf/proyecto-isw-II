@@ -67,6 +67,13 @@ class ContactoController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $nombre = $request->query('nombre');
+        $cliente = DB::table('contacto')->where('nombre', 'like', $nombre)->first();
+        return view('credito.index', compact('cliente'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
