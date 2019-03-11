@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApartadosTable extends Migration
+class CreateCreditosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateApartadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('apartados', function (Blueprint $table) {
+        Schema::create('creditos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cliente_id');
             $table->double('monto_total');
@@ -29,6 +29,6 @@ class CreateApartadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartados');
+        Schema::dropIfExists('creditos');
     }
 }

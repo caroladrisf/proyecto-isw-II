@@ -15,12 +15,9 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_articulo');
-            $table->foreign('id_articulo')->references('id')->on('articulos');
+            $table->integer('articulo_id');
             $table->integer('cantidad');
-            $table->integer('tipo');
-            $table->integer('id_tipo');
-            $table->timestamps();
+            $table->foreign('articulo_id')->references('id')->on('articulos');
         });
     }
 

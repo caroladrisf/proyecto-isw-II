@@ -18,9 +18,9 @@ class CreateAdminTable extends Migration
             $table->text('nombre');
             $table->text('apellido');
             $table->text('correo');
-            $table->text('username');
-            $table->text('password');
-            $table->text('rol');
+            $table->text('usuario');
+            $table->text('contrasena');
+            $table->text('permisos');
             $table->timestamps();
         });
     }
@@ -33,7 +33,7 @@ class CreateAdminTable extends Migration
     public function down()
     {
         Schema::table('admin', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('admin');
         });
     }
 }

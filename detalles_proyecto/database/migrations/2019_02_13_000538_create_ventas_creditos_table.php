@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApartadosTable extends Migration
+class CreateVentasCreditosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateApartadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('apartados', function (Blueprint $table) {
+        Schema::create('ventas_creditos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
-            $table->double('monto_total');
-            $table->date('fecha')->default(now());
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->integer('venta_id');
+            $table->integer('credito_id');
+            $table->foreign('venta_id')->references('id')->on('ventas');
+            $table->foreign('credito_id')->references('id')->on('creditos');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateApartadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartados');
+        Schema::dropIfExists('ventas_creditos');
     }
 }

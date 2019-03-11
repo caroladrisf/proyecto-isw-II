@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClienteTable extends Migration
+class CreateAbonosApartadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateClienteTable extends Migration
      */
     public function up()
     {
-        Schema::create('cliente', function (Blueprint $table) {
+        Schema::create('abonos_apartados', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_contacto');
-            $table->foreign('id_contacto')->references('id')->on('contacto');
-            $table->timestamps();
+            $table->integer('abono');
+            $table->integer('apartado_id');
+            $table->dateTime('fecha')->default(now());
         });
     }
 
@@ -28,6 +28,8 @@ class CreateClienteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cliente');
+        Schema::table('abonos_apartados', function (Blueprint $table) {
+            Schema::dropIfExists('abonos_apartados');
+        });
     }
 }

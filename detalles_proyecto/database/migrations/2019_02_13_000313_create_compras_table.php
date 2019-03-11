@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComprasProveedoresTable extends Migration
+class CreateComprasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateComprasProveedoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('compras_proveedores', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_proveedor');
-            $table->integer('id_articulo');
+            $table->integer('proveedor_id');
+            $table->integer('articulo_id');
             $table->integer('cantidad');
             $table->date('fecha')->default(now());
             $table->text('codigo_factura')->nullable();
-            $table->foreign('id_proveedor')->references('id')->on('proveedores');
-            $table->foreign('id_articulo')->references('id')->on('articulos');
-            $table->timestamps();
+            $table->foreign('proveedor_id')->references('id')->on('proveedores');
+            $table->foreign('articulo_id')->references('id')->on('articulos');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateComprasProveedoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras_proveedores');
+        Schema::dropIfExists('compras');
     }
 }

@@ -16,7 +16,6 @@ class CreateTelefonosTable extends Migration
         Schema::create('telefonos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('numero');
-            $table->timestamps();
         });
     }
 
@@ -28,7 +27,7 @@ class CreateTelefonosTable extends Migration
     public function down()
     {
         Schema::table('telefonos', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('telefonos');
         });
     }
 }
