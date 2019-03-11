@@ -19,8 +19,7 @@ class CreateContactosTable extends Migration
             $table->text('nombre');
             $table->text('apellido')->nullable();
             $table->text('correo')->nullable();
-            $table->integer('telefono_id')->nullable();
-            $table->foreign('telefono_id')->references('id')->on('telefonos');
+            $table->text('telefono')->nullable();
             $table->timestamps();
         });
     }

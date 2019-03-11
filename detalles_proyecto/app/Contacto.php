@@ -18,6 +18,6 @@ class Contacto extends Model
         'nombre',
         'apellido',
         'correo',
-        'telefono_id'
+        'telefono'
     ];
 }
