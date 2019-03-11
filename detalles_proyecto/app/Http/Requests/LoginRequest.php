@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|exists:admin,username',
-            'password' => 'required'
+            'usuario' => 'required|exists:admin,usuario',
+            'contrasena' => 'required'
         ];
     }
 
@@ -37,9 +37,9 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Escriba el usuario',
-            'username.exists'  => 'Usuario o contraseña incorrecta',
-            'password.required'  => 'Escriba la contraseña'
+            'usuario.required' => 'Escriba el usuario',
+            'usuario.exists'  => 'Usuario o contraseña incorrecta',
+            'contrasena.required'  => 'Escriba la contraseña'
         ];
     }
 }

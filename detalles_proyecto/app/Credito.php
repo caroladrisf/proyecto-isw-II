@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Venta extends Model
+class Credito extends Model
 {
-    protected $table = 'ventas';
+    protected $table = 'creditos';
     public $timestamps = false;
 
     /**
@@ -15,7 +15,8 @@ class Venta extends Model
      * @var array
      */
     protected $fillable = [
-        'articulo_id',
-        'cantidad',
+        'cliente_id',
+        'monto_total',
+        'fecha'
     ];
 }

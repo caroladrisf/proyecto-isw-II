@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contacto extends Model
 {
+    protected $table = 'contactos';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id',
-        'tipo_contacto',
+        'cedula',
         'nombre',
         'apellido',
         'correo',
-        'direccion',
-        'id_telefono'
+        'telefono_id'
     ];
 }

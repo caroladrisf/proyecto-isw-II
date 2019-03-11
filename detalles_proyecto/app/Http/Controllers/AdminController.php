@@ -37,22 +37,18 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $admin = new Admin();
-        $tipo_rol_1= $request->input('rol-1') ?? '';
-        $tipo_rol_2= $request->input('rol-2') ?? '';
-        $tipo_rol_3= $request->input('rol-3') ?? '';
-        $tipo_rol_4= $request->input('rol-4') ?? '';
-        $roles = $tipo_rol_1.','.$tipo_rol_2.','.$tipo_rol_3.','.$tipo_rol_4;
-        $admin->rol = $roles;
+        $rol_1= $request->input('rol-1') ?? '';
+        $rol_2= $request->input('rol-2') ?? '';
+        $rol_3= $request->input('rol-3') ?? '';
+        $rol_4= $request->input('rol-4') ?? '';
+        $permisos = $rol_1.','.$rol_2.','.$rol_3.','.$rol_4;
         $admin->fill($request->all());
-        $admin = DB::table('admin')->insert([
-            'nombre'=>"$admin->nombre",
-            'apellido'=>"$admin->apellido",
-            'correo'=>"$admin->correo",
-            'username'=>"$admin->username",
-            'password'=>"$admin->password",
-            'rol'=>"$admin->rol"
+        $admin->fill([
+            'contrasena' => md5($request->input('contrasena')),
+            'permisos' => $permisos
         ]);
-        return redirect('/admin');
+        $admin->save();
+        return redirect('/');
     }
 
     /**
@@ -104,14 +100,15 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function session(LoginRequest $req) {
-        $admin = Admin::where('username', 'like', $req->username)->first();
-        if ($admin->password == $req->password) {
-            $req->session()->put('usuario', $admin->id);
+    public function session(LoginRequest $request) {
+        $admin = Admin::where('usuario', 'like', $request->usuario)
+        ->where('contrasena', 'like', md5($request->contrasena))->first();
+        if ($admin) {
+            $request->session()->put('usuario', $admin->id);
             return redirect('/');
         } else {
-            return back()->withErrors(['message' => 'Usuario o contraseña incorrecto'])
-                         ->withInput(request(['username']));
+            return back()->withErrors(['message' => 'Usuario o contraseña incorrecto :('])
+                         ->withInput(request(['usuario']));
         }
     }
 

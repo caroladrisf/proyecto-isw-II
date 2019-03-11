@@ -24,18 +24,18 @@
                     </div>
                     <div class="form-group">
                         <label>Nombre de Usuario</label>
-                        <input type="text" name="username" class="form-control">
+                        <input type="text" name="usuario" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" name="contrasena" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Repita Contraseña</label>
                         <input type="password" name="re-password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Rol de Administrador</label> <br>
+                        <label>Permisos de Administrador</label> <br>
                         <input type="checkbox" name="rol-1" value="1">&nbspAdministrador (Acceso total) <br>
                         <input type="checkbox" name="rol-2" value="2">&nbspSolo clientes <br>
                         <input type="checkbox" name="rol-3" value="3">&nbspSolo inventarios <br>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="text-center w-50 mx-auto pt-2">
                         <button type="submit" class="btn btn-primary btn-block"><strong>Agregar</strong></button>
-                        <a href="{{ url('admin') }}" class="btn btn-secondary btn-block"><strong>Cancelar</strong></a>
+                        <a href="{{ url('/') }}" class="btn btn-secondary btn-block"><strong>Cancelar</strong></a>
                     </div>
                 </form>   
             </div>

@@ -17,8 +17,8 @@ class Admin extends Model
         'nombre',
         'apellido',
         'correo',
-        'username',
-        'password',
-        'rol'
+        'usuario',
+        'contrasena',
+        'permisos'
     ];
 }

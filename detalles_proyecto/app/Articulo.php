@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Articulo extends Model
 {
+    protected $table = 'articulos';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id',
         'descripcion',
         'cantidad',
-        'precio_compra',
-        'precio_venta'
+        'precio_venta',
+        'precio_compra'
     ];
 }
