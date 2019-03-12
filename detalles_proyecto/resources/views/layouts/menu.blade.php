@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{ url('/articulos') }}">Inventario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/contactos') }}">Clientes</a>
+                    <a class="nav-link" href="{{ url('/clientes') }}">Clientes</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="ventasDropdown" role="button" data-toggle="dropdown"
@@ -34,7 +34,7 @@
                     <a class="nav-link" href="{{ url('/abonos') }}">Abonos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/contactos') }}">Proveedores</a>
+                    <a class="nav-link" href="{{ url('/') }}">Proveedores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/create') }}">Registro</a>

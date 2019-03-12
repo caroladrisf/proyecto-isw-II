@@ -28,8 +28,8 @@ Route::get('/ventas/cliente', 'ContactoController@search');
 
 Route::resources([
     'articulos' => 'ArticuloController',
-    'contactos' => 'ContactoController',
-    'admin' => 'AdminController',
-    'debitos' => 'VentaDebitoController'
+    'clientes'  => 'ClienteController',
+    'admin'     => 'AdminController',
+    'debitos'   => 'VentaDebitoController'
 ]/* , ['middleware' => ['admin']] */);
 

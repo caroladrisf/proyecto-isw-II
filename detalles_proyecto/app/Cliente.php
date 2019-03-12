@@ -17,4 +17,20 @@ class Cliente extends Model
     protected $fillable = [
         'contacto_id'
     ];
+
+    /**
+     * Obtener los créditos asociados al cliente
+     */
+    public function creditos()
+    {
+        return $this->hasMany('App\Credito');
+    }
+
+    /**
+     * Obtener la información de contacto del cliente
+     */
+    public function contacto()
+    {
+        return $this->belongsTo('App\Contacto');
+    }
 }

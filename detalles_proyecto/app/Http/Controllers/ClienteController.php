@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
+use App\Contacto;
+use App\Telefono;
 
 class ClienteController extends Controller
 {
@@ -13,6 +16,12 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        $clientes = Cliente::paginate(10);
+        foreach ($clientes as $cliente) {
+            $cliente->contacto = Cliente::find($cliente->id)->contacto;
+            /* $cliente->contacto->telefonos = Contacto::find($cliente->contacto->id)->telefonos; */
+        }
+        return view('clientes.index', compact('clientes'));
     }
 
     /**
@@ -22,6 +31,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
+        return view('clientes.create');
     }
 
     /**
@@ -32,7 +42,14 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $contacto = Contacto::create($request->all());
+        /* $telefono = $contacto->telefonos()->create([
+            'numero' => $request->input('numero'),
+            'contacto_id' => $contacto->id
+        ]);
+        $contacto->telefonos = $telefono; */
+        $cliente = Cliente::create(['contacto_id' => $contacto->id]);
+        return redirect('clientes');
     }
 
     /**
@@ -52,9 +69,11 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cliente $cliente)
     {
-        //
+        $cliente->contacto = Cliente::find($cliente->id)->contacto;
+        /* $cliente->contacto->telefonos = Contacto::find($cliente->contacto->id)->telefonos; */
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -64,9 +83,11 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        //
+        $contacto = Contacto::findOrFail($cliente->contacto_id);
+        $contacto->fill($request->all())->save();
+        return redirect('clientes');
     }
 
     /**
@@ -75,8 +96,10 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cliente $cliente)
     {
-        //
+        Cliente::destroy($cliente->id);
+        Contacto::destroy($cliente->contacto_id);
+        return redirect('clientes');
     }
 }
