@@ -8,32 +8,57 @@
         <div class="shadow pb-3">
             <div class="p-4">
                 <div>
-                    <form method="GET" action="{{ action('ContactoController@search') }}" class="form-group row">
+                    @if (!Session::get('cliente_id'))
+                    <form method="GET" action="{{ url('/creditos/clientes') }}" class="form-group row">
                         <label class="col-sm-2 col-form-label text-center">Cédula del cliente</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" name="nombre" class="form-control">
+                                <input type="text" name="cedula" class="form-control">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
+                            @isset($contactos)
+                            <div class="list-group">
+                                @foreach ($contactos as $contacto)
+                                <a href="{{ action('CreditoController@asignarCliente', $contacto->cliente->id) }}"
+                                    class="list-group-item list-group-item-action">
+                                    {{ $contacto->cedula }} - {{ $contacto->nombre }}</a>
+                                @endforeach
+                            </div>
+                            @endisset
                         </div>
-                        <a href="{{ url('/contactos/create') }}" class="col-sm-2 btn btn-primary">Nuevo cliente</a>
+                        <div>
+                            <a href="{{ url('/clientes/create') }}" class="btn btn-primary">Nuevo cliente</a>
+                        </div>
                     </form>
-                    @if ($cliente)
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nombre</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->nombre }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Correo</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->correo }}">
-                        </div>
-                    </div>
                     @endif
+                    @isset($cliente)
+                    <div class="px-5">
+                        <div class="form-group row">
+                            <label class="col-sm-10 col-form-label">INFORMACIÓN DEL CLIENTE</label>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Cédula</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->cedula }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Nombre</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->nombre }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Correo</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->correo }}">
+                                <a href="{{ url('/creditos') }}" class="">Cambiar cliente</a>
+                            </div>
+                        </div>
+                    </div>
+                    @endisset
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label text-center">Artículo</label>
                         <div class="col-sm-4">
@@ -70,7 +95,7 @@
                         <td>₡5.000</td>
                         <td>
                             <div class="d-flex justify-content-center">
-                                <form action="{{ action('VentaCreditoController@create') }}" method="POST">
+                                <form action="{{ action('CreditoController@create') }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger ml-1" type="submit"><i class="fas fa-trash"></i></button>
@@ -85,7 +110,7 @@
                         <td>₡20.000</td>
                         <td>
                             <div class="d-flex justify-content-center">
-                                <form action="{{ action('VentaCreditoController@create') }}" method="POST">
+                                <form action="{{ action('CreditoController@create') }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger ml-1" type="submit"><i class="fas fa-trash"></i></button>

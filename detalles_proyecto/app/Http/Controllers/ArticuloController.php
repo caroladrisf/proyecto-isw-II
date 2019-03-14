@@ -21,7 +21,7 @@ class ArticuloController extends Controller
             $articulos = Articulo::where('descripcion', 'like', '%' . $query . '%')
             ->orderBy('id', 'asc')->paginate(6);
         } else {
-            $articulos = Articulo::orderBy('id', 'asc')->orderBy('id', 'asc')->paginate(6);
+            $articulos = Articulo::orderBy('id', 'asc')->paginate(6);
         }
         return view('articulos.index', compact('articulos'));
     }

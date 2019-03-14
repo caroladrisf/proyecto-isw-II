@@ -7,7 +7,7 @@
     <div class="col-sm-6">
         <div class="card border-light mx-auto mb-5" id="custom">
             <div class="card-header text-center">
-                <h5>Agregar artículo</h5>
+                <h5>Editar artículo</h5>
             </div>
             <div class="p-4 shadow">
                 @if ($errors->any())

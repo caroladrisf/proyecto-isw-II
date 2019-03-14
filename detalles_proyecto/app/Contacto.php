@@ -20,4 +20,12 @@ class Contacto extends Model
         'correo',
         'telefono'
     ];
+
+    /**
+     * Obtener la información de contacto del cliente
+     */
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente');
+    }
 }
