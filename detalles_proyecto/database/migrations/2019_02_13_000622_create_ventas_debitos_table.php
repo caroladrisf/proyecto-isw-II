@@ -15,9 +15,10 @@ class CreateVentasDebitosTable extends Migration
     {
         Schema::create('ventas_debitos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('venta_id');
+            $table->integer('cantidad');
+            $table->integer('articulo_id');
+            $table->foreign('articulo_id')->references('id')->on('articulos');
             $table->integer('debito_id');
-            $table->foreign('venta_id')->references('id')->on('ventas');
             $table->foreign('debito_id')->references('id')->on('debitos');
         });
     }

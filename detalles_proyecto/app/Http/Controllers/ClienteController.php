@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
-use App\Contacto;
+use App\Http\Requests\ClienteRequest;
 
 class ClienteController extends Controller
 {
@@ -13,11 +13,16 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::paginate(10);
-        foreach ($clientes as $cliente) {
-            $cliente->contacto = Cliente::find($cliente->id)->contacto;
+        $query = '%' . $request->query('buscar') . '%';
+        if ($query) {
+            $clientes = Cliente::where('cedula', 'like', $query)
+                                ->orWhere('nombre', 'like', $query)
+                                ->orWhere('apellido', 'like', $query)
+                                ->orderBy('id', 'asc')->paginate(6);
+        } else {
+            $clientes = Cliente::orderBy('id', 'asc')->paginate(10);
         }
         return view('clientes.index', compact('clientes'));
     }
@@ -35,13 +40,12 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ClienteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        $contacto = Contacto::create($request->all());
-        $cliente = Cliente::create(['contacto_id' => $contacto->id]);
+        $cliente = Cliente::create($request->all());
         return redirect('clientes');
     }
 
@@ -64,21 +68,20 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        $cliente->contacto = Cliente::find($cliente->id)->contacto;
         return view('clientes.edit', compact('cliente'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ClienteRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(ClienteRequest $request, Cliente $cliente)
     {
-        $contacto = Contacto::findOrFail($cliente->contacto_id);
-        $contacto->fill($request->all())->save();
+        $cliente->fill($request->all());
+        $cliente->update();
         return redirect('clientes');
     }
 
@@ -91,7 +94,6 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         Cliente::destroy($cliente->id);
-        Contacto::destroy($cliente->contacto_id);
         return redirect('clientes');
     }
 }

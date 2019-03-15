@@ -24,23 +24,23 @@
                     @csrf
                     <div class="form-group">
                         <label>Cédula</label>
-                        <input type="text" value="{{ $cliente->contacto->cedula }}" class="form-control" placeholder="Cédula" name="cedula">
+                        <input type="text" value="{{ $cliente->cedula }}" class="form-control" placeholder="Cédula" name="cedula">
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" value="{{ $cliente->contacto->nombre }}" class="form-control" placeholder="Nombre" name="nombre">
+                        <input type="text" value="{{ $cliente->nombre }}" class="form-control" placeholder="Nombre" name="nombre">
                     </div>
                     <div class="form-group">
                         <label>Apellido</label>
-                        <input type="text" value="{{ $cliente->contacto->apellido }}" class="form-control" placeholder="Apellido" name="apellido">
+                        <input type="text" value="{{ $cliente->apellido }}" class="form-control" placeholder="Apellido" name="apellido">
                     </div>
                     <div class="form-group">
                         <label>Correo</label>
-                        <input type="text" value="{{ $cliente->contacto->correo }}" class="form-control" placeholder="Correo" name="correo">
+                        <input type="text" value="{{ $cliente->correo }}" class="form-control" placeholder="Correo" name="correo">
                     </div>
                     <div class="form-group">
                         <label>Teléfono</label>
-                        <input type="text" value="{{ $cliente->contacto->telefono }}" class="form-control" placeholder="Teléfono" name="telefono">
+                        <input type="text" value="{{ $cliente->telefono }}" class="form-control" placeholder="Teléfono" name="telefono">
                     </div>
                     <div class="text-center w-50 mx-auto pt-2">
                         <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>

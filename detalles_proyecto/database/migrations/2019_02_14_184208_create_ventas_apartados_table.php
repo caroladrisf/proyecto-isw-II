@@ -15,9 +15,10 @@ class CreateVentasApartadosTable extends Migration
     {
         Schema::create('ventas_apartados', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('venta_id');
+            $table->integer('cantidad');
+            $table->integer('articulo_id');
+            $table->foreign('articulo_id')->references('id')->on('articulos');
             $table->integer('apartado_id');
-            $table->foreign('venta_id')->references('id')->on('ventas');
             $table->foreign('apartado_id')->references('id')->on('apartados');
         });
     }

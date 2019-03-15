@@ -15,14 +15,8 @@ class VentaCredito extends Model
      * @var array
      */
     protected $fillable = [
-        'venta_id',
+        'cantidad',
+        'articulo_id',
         'credito_id',
     ];
-
-    public function articulo()
-    {
-        return $this->hasMany(
-            'App\Venta'
-        );
-    }
 }

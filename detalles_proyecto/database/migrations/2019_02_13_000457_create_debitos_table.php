@@ -15,7 +15,8 @@ class CreateDebitosTable extends Migration
     {
         Schema::create('debitos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
+            $table->integer('cliente_id')->nullable();
+            $table->text('nombre')->nullable();
             $table->double('monto_total');
             $table->date('fecha')->default(now());
             $table->foreign('cliente_id')->references('id')->on('clientes');

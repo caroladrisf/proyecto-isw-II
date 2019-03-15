@@ -35,11 +35,11 @@
                 @foreach($clientes as $cliente)
                 <tbody>
                     <tr class="text-center">
-                        <td>{{$cliente->contacto->cedula}}</td>
-                        <td>{{$cliente->contacto->nombre}}</td>
-                        <td>{{$cliente->contacto->apellido}}</td>
-                        <td>{{$cliente->contacto->correo}}</td>
-                        <td>{{$cliente->contacto->telefono}}</td>
+                        <td>{{$cliente->cedula}}</td>
+                        <td>{{$cliente->nombre}}</td>
+                        <td>{{$cliente->apellido}}</td>
+                        <td>{{$cliente->correo}}</td>
+                        <td>{{$cliente->telefono}}</td>
                         <td>
                             <div class="row ml-5">
                                 <a href="{{ action('ClienteController@edit', $cliente->id) }}" class="btn btn-info"><i

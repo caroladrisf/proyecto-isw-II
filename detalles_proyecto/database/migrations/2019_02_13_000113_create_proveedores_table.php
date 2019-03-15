@@ -15,8 +15,12 @@ class CreateProveedoresTable extends Migration
     {
         Schema::create('proveedores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('contacto_id');
-            $table->foreign('contacto_id')->references('id')->on('contactos');
+            $table->text('cedula')->nullable();
+            $table->text('nombre');
+            $table->text('apellido')->nullable();
+            $table->text('correo')->nullable();
+            $table->text('telefono')->nullable();
+            $table->timestamps();
         });
     }
 

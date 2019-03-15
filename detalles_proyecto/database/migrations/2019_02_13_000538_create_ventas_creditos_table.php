@@ -15,9 +15,10 @@ class CreateVentasCreditosTable extends Migration
     {
         Schema::create('ventas_creditos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('venta_id');
+            $table->integer('cantidad');
+            $table->integer('articulo_id');
+            $table->foreign('articulo_id')->references('id')->on('articulos');
             $table->integer('credito_id');
-            $table->foreign('venta_id')->references('id')->on('ventas');
             $table->foreign('credito_id')->references('id')->on('creditos');
         });
     }

@@ -15,7 +15,8 @@ class VentaDebito extends Model
      * @var array
      */
     protected $fillable = [
-        'venta_id',
+        'cantidad',
+        'articulo_id',
         'debito_id',
     ];
 }

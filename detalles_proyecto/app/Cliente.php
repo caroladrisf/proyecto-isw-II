@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     protected $table = 'clientes';
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +14,11 @@ class Cliente extends Model
      * @var array
      */
     protected $fillable = [
-        'contacto_id'
+        'cedula',
+        'nombre',
+        'apellido',
+        'correo',
+        'telefono'
     ];
 
     /**
@@ -24,13 +27,5 @@ class Cliente extends Model
     public function creditos()
     {
         return $this->hasMany('App\Credito');
-    }
-
-    /**
-     * Obtener la información de contacto del cliente
-     */
-    public function contacto()
-    {
-        return $this->belongsTo('App\Contacto');
     }
 }

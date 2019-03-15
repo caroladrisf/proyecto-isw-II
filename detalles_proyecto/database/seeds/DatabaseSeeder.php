@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         DB::table('admin')->insert([
             'nombre' => Str::random(10),
             'apellido' => Str::random(10),
-            'correo' => Str::random(10).'@gmail.com',
+            'correo' => 'admin@gmail.com',
             'usuario' => 'admin',
             'contrasena' => md5('admin'),
             'permisos' => '1,2,3,4',
