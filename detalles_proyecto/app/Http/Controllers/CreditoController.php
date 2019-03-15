@@ -8,30 +8,54 @@ class CreditoController extends Controller
 {
     public function create(Request $request)
     {
-        $request->session()->forget('cliente_id');
-        return view('creditos.index');
+        $cliente = $this->cliente($request->session()->get('cliente_id'));
+        $articulos = $this->articulos($request->session()->get('articulos_id'));
+        return view('creditos.index', compact('cliente', 'articulos'));
+    }
+
+    public function cliente($id)
+    {
+        $cliente = \App\Cliente::find($id);
+        return $cliente;
+    }
+
+    public function articulos($id)
+    {
+        $articulos = \App\Articulo::find($id);
+        return $articulos;
     }
 
     public function buscarClientes(Request $request)
     {
-        $request->session()->forget('cliente_id');
-        $query = '%' . $request->query('cedula') . '%';
-        $contactos = \App\Contacto::where('cedula', 'like', $query)->get();
-        if ($contactos) {
-            foreach ($contactos as $contacto) {
-                $contacto->cliente = \App\Contacto::find($contacto->id)->cliente;
+        if ($request->query('cliente')){
+            $query = '%' . $request->query('cliente') . '%';
+            $clientes = \App\Cliente::where('cedula', 'like', $query)
+            ->orWhere('nombre', 'like', $query)
+            ->orWhere('apellido', 'like', $query)
+            ->orderBy('id', 'asc')->get();
+            if (count($clientes) > 1) {
+                $articulos = $this->articulos($request->session()->get('articulos_id'));
+                return view('creditos.index', compact('clientes', 'articulos'));
+            } else if (count($clientes) == 1) {
+                return redirect("/creditos/clientes/{$clientes[0]->id}");
+            } else {
+                return redirect('creditos')->with('cliente_error', 'Ningún cliente registrado coincide con la busqueda');
             }
-            return view('creditos.index', compact('contactos'));
         } else {
-            return back()->withErrors('No se encontró el cliente');
+            return redirect('creditos');
         }
     }
 
     public function asignarCliente(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id)->first();
-        $cliente->contacto = \App\Cliente::find($cliente->id)->contacto;
+        $cliente = \App\Cliente::find($id);
         $request->session()->put('cliente_id', $cliente->id);
-        return view('creditos.index', compact('cliente'));
+        return redirect('creditos');
+    }
+
+    public function quitarCliente(Request $request)
+    {
+        $request->session()->forget('cliente_id');
+        return redirect('creditos');
     }
 }

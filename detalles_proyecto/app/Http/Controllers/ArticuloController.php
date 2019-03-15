@@ -16,10 +16,10 @@ class ArticuloController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->query('buscar');
+        $query = '%' . $request->query('buscar') . '%';
         if ($query) {
-            $articulos = Articulo::where('descripcion', 'like', '%' . $query . '%')
-            ->orderBy('id', 'asc')->paginate(6);
+            $articulos = Articulo::where('descripcion', 'like', $query)
+                                    ->orderBy('id', 'asc')->paginate(6);
         } else {
             $articulos = Articulo::orderBy('id', 'asc')->paginate(6);
         }

@@ -1,80 +1,84 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="card border-light mx-auto " id="custom">
+    <div class="card mx-auto " id="custom">
         <div class="card-header text-center">
             <h5>Crédito</h5>
         </div>
-        <div class="shadow pb-3">
-            <div class="p-4">
-                <div>
+        <div class="card-body border-dark">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h6 class="ml-2">Cliente</h6>
                     @if (!Session::get('cliente_id'))
-                    <form method="GET" action="{{ url('/creditos/clientes') }}" class="form-group row">
-                        <label class="col-sm-2 col-form-label text-center">Cédula del cliente</label>
-                        <div class="col-sm-8">
+                    <form method="GET" action="{{ url('/creditos/clientes') }}">
+                        <div class="form-group">
+                            @if (session('cliente_error'))
+                            <div class="alert alert-dismissible alert-warning">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ session('cliente_error') }}
+                            </div>
+                            @endif
+                            <small class="form-text text-muted">Busque un cliente por número de cédula,
+                                nombre o apellido.</small>
                             <div class="input-group">
-                                <input type="text" name="cedula" class="form-control">
+                                <input type="text" name="cliente" class="form-control">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
-                            @isset($contactos)
-                            <div class="list-group">
-                                @foreach ($contactos as $contacto)
-                                <a href="{{ action('CreditoController@asignarCliente', $contacto->cliente->id) }}"
-                                    class="list-group-item list-group-item-action">
-                                    {{ $contacto->cedula }} - {{ $contacto->nombre }}</a>
+                            @isset($clientes)
+                            <div class="list-group mr-5">
+                                @foreach ($clientes as $c)
+                                <a href="{{ action('CreditoController@asignarCliente', $c->id) }}" class="list-group-item list-group-item-action">
+                                    {{ $c->cedula }} - {{ $c->nombre. ' ' . $c->apellido }}</a>
                                 @endforeach
                             </div>
                             @endisset
                         </div>
-                        <div>
-                            <a href="{{ url('/clientes/create') }}" class="btn btn-primary">Nuevo cliente</a>
-                        </div>
                     </form>
+                    @else
+                    <table class="table table-borderless table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Cédula</th>
+                                <th scope="col">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @isset($cliente)
+                            <tr>
+                                <td>{{ $cliente->cedula }}</td>
+                                <td>{{ $cliente->nombre . ' ' . $cliente->apellido }}</td>
+                            </tr>
+                            @endisset
+                            <tr>
+                                <td col-span="2">
+                                    <form action="{{ action('CreditoController@quitarCliente') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-primary" type="submit">Cambiar cliente</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <tbody>
+                    </table>
                     @endif
-                    @isset($cliente)
-                    <div class="px-5">
-                        <div class="form-group row">
-                            <label class="col-sm-10 col-form-label">INFORMACIÓN DEL CLIENTE</label>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Cédula</label>
-                            <div class="col-sm-8">
-                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->cedula }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->nombre }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Correo</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly="" class="form-control-plaintext" value="{{ $cliente->contacto->correo }}">
-                                <a href="{{ url('/creditos') }}" class="">Cambiar cliente</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endisset
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label text-center">Artículo</label>
-                        <div class="col-sm-4">
+                </div>
+                <div class="col-md-6">
+                    <h6 class="ml-2">Artículo</h6>
+                    <form method="GET" action="{{ url('/creditos/clientes') }}">
+                        <div class="form-group">
                             <div class="input-group">
-                                <input type="text" name="articulo" class="form-control">
+                                <input type="text" name="cliente" class="form-control">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
-                        <label class="col-sm-2 col-form-label text-center">Cantidad</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" placeholder="1">
+                        <div>
+                            <a href="{{ url('/clientes/create') }}" class="btn btn-block btn-primary">Nuevo cliente</a>
                         </div>
-                        <a href="#" class="col-sm-2 btn btn-primary">Agregar</a>
-                    </div>
+                    </form>
                 </div>
             </div>
             <table class="table table-sm table-hover table-bordered">
@@ -91,7 +95,7 @@
                     <tr>
                         <th scope="row">1</th>
                         <td>Artículo #1</td>
-                        <td><input type="text" name="cantidad" value="1" class="form-control form-control-sm"></td>
+                        <td>3</td>
                         <td>₡5.000</td>
                         <td>
                             <div class="d-flex justify-content-center">
@@ -120,9 +124,9 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="text-center w-50 mx-auto pt-2">
-                <a href="ventas.html" class="btn btn-primary btn-block"><strong>Confirmar venta</strong></a>
-            </div>
+        </div>
+        <div class="card-footer">
+            <p>footer</p>
         </div>
     </div>
 </div>

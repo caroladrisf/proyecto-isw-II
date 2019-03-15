@@ -33,5 +33,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/creditos', 'CreditoController@create');
     Route::get('/creditos/clientes', 'CreditoController@buscarClientes');
     Route::get('/creditos/clientes/{id}', 'CreditoController@asignarCliente');
+    Route::delete('/creditos/cliente', 'CreditoController@quitarCliente');
+    Route::get('/creditos/articulos', 'CreditoController@buscarClientes');
 
 });
