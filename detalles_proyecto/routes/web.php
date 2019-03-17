@@ -22,6 +22,7 @@ Route::middleware(['admin'])->group(function () {
         return view('welcome');
     });
     
+    // Rutas de los CRUDs
     Route::resources([
         'articulos' => 'ArticuloController',
         'clientes'  => 'ClienteController',
@@ -34,6 +35,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/creditos/clientes', 'CreditoController@buscarClientes');
     Route::get('/creditos/clientes/{id}', 'CreditoController@asignarCliente');
     Route::delete('/creditos/cliente', 'CreditoController@quitarCliente');
-    Route::get('/creditos/articulos', 'CreditoController@buscarClientes');
+    Route::get('/creditos/articulos', 'CreditoController@buscarArticulos');
+    Route::get('/creditos/articulos/{id}', 'CreditoController@seleccionarArticulo');
+    Route::post('/creditos/articulos/{id}', 'CreditoController@asignarArticulo');
+    Route::delete('/creditos/articulos/{id}', 'CreditoController@quitarArticulo');
 
 });

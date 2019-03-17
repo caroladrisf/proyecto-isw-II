@@ -9,7 +9,7 @@ class CreditoController extends Controller
     public function create(Request $request)
     {
         $cliente = $this->cliente($request->session()->get('cliente_id'));
-        $articulos = $this->articulos($request->session()->get('articulos_id'));
+        $articulos = $this->articulos($request->session()->get('articulos'));
         return view('creditos.index', compact('cliente', 'articulos'));
     }
 
@@ -19,9 +19,16 @@ class CreditoController extends Controller
         return $cliente;
     }
 
-    public function articulos($id)
+    public function articulos($session)
     {
-        $articulos = \App\Articulo::find($id);
+        $articulos = [];
+        if ($session) {
+            foreach ($session as $data) {
+                $articulo = \App\Articulo::find($data['id']);
+                $articulo->fill(['cantidad' => $data['cantidad']]);
+                $articulos[] = $articulo;
+            }
+        }
         return $articulos;
     }
 
@@ -29,12 +36,12 @@ class CreditoController extends Controller
     {
         if ($request->query('cliente')){
             $query = '%' . $request->query('cliente') . '%';
-            $clientes = \App\Cliente::where('cedula', 'like', $query)
+            $clientes = \App\Cliente::where('cedula', 'ilike', $query)
             ->orWhere('nombre', 'like', $query)
             ->orWhere('apellido', 'like', $query)
             ->orderBy('id', 'asc')->get();
             if (count($clientes) > 1) {
-                $articulos = $this->articulos($request->session()->get('articulos_id'));
+                $articulos = $this->articulos($request->session()->get('articulos'));
                 return view('creditos.index', compact('clientes', 'articulos'));
             } else if (count($clientes) == 1) {
                 return redirect("/creditos/clientes/{$clientes[0]->id}");
@@ -48,14 +55,60 @@ class CreditoController extends Controller
 
     public function asignarCliente(Request $request, $id)
     {
-        $cliente = \App\Cliente::find($id);
-        $request->session()->put('cliente_id', $cliente->id);
+        $request->session()->put('cliente_id', $id);
         return redirect('creditos');
     }
 
     public function quitarCliente(Request $request)
     {
         $request->session()->forget('cliente_id');
+        return redirect('creditos');
+    }
+
+    public function buscarArticulos(Request $request)
+    {
+        if ($request->query('art')){
+            $query = '%' . $request->query('art') . '%';
+            $result = \App\Articulo::where('descripcion', 'ilike', $query)
+            ->orderBy('id', 'asc')->get();
+            if (count($result) > 1) {
+                $cliente = $this->cliente($request->session()->get('cliente_id'));
+                $articulos = $this->articulos($request->session()->get('articulos'));
+                return view('creditos.index', compact('cliente', 'articulos', 'result'));
+            } else if (count($result) == 1) {
+                return redirect("/creditos/articulos/{$result[0]->id}");
+            } else {
+                return redirect('creditos')->with('articulos_error', 'Ningún artículo registrado coincide con la busqueda');
+            }
+        } else {
+            return redirect('creditos');
+        }
+    }
+
+    public function seleccionarArticulo(Request $request, $id)
+    {
+        $articulo = \App\Articulo::find($id);
+        $cliente = $this->cliente($request->session()->get('cliente_id'));
+        $articulos = $this->articulos($request->session()->get('articulos'));
+        return view('creditos.index', compact('cliente', 'articulos', 'articulo'));
+    }
+
+    public function asignarArticulo(Request $request, $id)
+    {
+        $cantidad = $request->get('cantidad');
+        $request->session()->push('articulos', [ 'id' => $id, 'cantidad' => $cantidad ]);
+        return redirect('creditos');
+    }
+
+    public function quitarArticulo(Request $request, $id)
+    {
+        $data = $request->session()->get('articulos');
+        $keys = array_keys($data);
+        for ($i=0; $i < count($data); $i++) {
+            if ($data[$keys[$i]]['id'] === $id) {
+                $item = $request->session()->pull("articulos.$keys[$i]");
+            }
+        }
         return redirect('creditos');
     }
 }
