@@ -27,7 +27,7 @@
                     <div class="dropdown-menu" aria-labelledby="ventasDropdown">
                         <a class="dropdown-item" href="{{ url('/ventas/contados') }}">Contado</a>
                         <a class="dropdown-item" href="{{ url('/creditos') }}">Crédito</a>
-                        <a class="dropdown-item" href="{{ url('/ventas/apartados') }}">Apartado</a>
+                        <a class="dropdown-item" href="{{ url('/apartados') }}">Apartado</a>
                     </div>
                 </li>
                 <li class="nav-item">
