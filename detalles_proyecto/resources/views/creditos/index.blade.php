@@ -159,8 +159,16 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer">
-            <p>footer</p>
+        <div class="card-footer d-flex justify-content-end align-items-center">
+            <form class="w-25 mx-1" method="POST" action="{{ action('CreditoController@store') }}">
+                @csrf
+                <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
+            </form>
+            <form class="w-25 mx-1" method="POST" action="{{ action('CreditoController@cancelar') }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-secondary btn-block">Cancelar</button>
+            </form>
         </div>
     </div>
 </div>

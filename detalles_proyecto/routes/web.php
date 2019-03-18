@@ -32,6 +32,8 @@ Route::middleware(['admin'])->group(function () {
 
     // Rutas de ventas a crédito
     Route::get('/creditos', 'CreditoController@create');
+    Route::post('/creditos', 'CreditoController@store');
+    Route::delete('/creditos', 'CreditoController@cancelar');
     Route::get('/creditos/clientes', 'CreditoController@buscarClientes');
     Route::get('/creditos/clientes/{id}', 'CreditoController@asignarCliente');
     Route::delete('/creditos/cliente', 'CreditoController@quitarCliente');
@@ -39,5 +41,17 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/creditos/articulos/{id}', 'CreditoController@seleccionarArticulo');
     Route::post('/creditos/articulos/{id}', 'CreditoController@asignarArticulo');
     Route::delete('/creditos/articulos/{id}', 'CreditoController@quitarArticulo');
+
+    // Rutas de apartados
+    Route::get('/apartados', 'ApartadoController@create');
+    Route::post('/apartados', 'ApartadoController@store');
+    Route::delete('/apartados', 'ApartadoController@cancelar');
+    Route::get('/apartados/clientes', 'ApartadoController@buscarClientes');
+    Route::get('/apartados/clientes/{id}', 'ApartadoController@asignarCliente');
+    Route::delete('/apartados/cliente', 'ApartadoController@quitarCliente');
+    Route::get('/apartados/articulos', 'ApartadoController@buscarArticulos');
+    Route::get('/apartados/articulos/{id}', 'ApartadoController@seleccionarArticulo');
+    Route::post('/apartados/articulos/{id}', 'ApartadoController@asignarArticulo');
+    Route::delete('/apartados/articulos/{id}', 'ApartadoController@quitarArticulo');
 
 });

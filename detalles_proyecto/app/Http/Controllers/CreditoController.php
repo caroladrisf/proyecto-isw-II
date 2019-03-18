@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Articulo;
+use App\Cliente;
+use App\Credito;
+use App\VentaCredito;
 use Illuminate\Http\Request;
 
 class CreditoController extends Controller
@@ -13,9 +17,42 @@ class CreditoController extends Controller
         return view('creditos.index', compact('cliente', 'articulos'));
     }
 
+    public function store(Request $request)
+    {
+        $articulos = $this->articulos($request->session()->get('articulos'));
+        $credito = new Credito();
+        $credito->fecha = now();
+        $credito->cliente_id = $request->session()->get('cliente_id');
+        $credito->monto_total = 0;
+        foreach ($articulos as $articulo) {
+            $credito->monto_total += $articulo->cantidad * $articulo->precio_venta;
+        }
+        $credito->save();
+        if ($credito->id) {
+            foreach ($articulos as $venta) {
+                VentaCredito::create([
+                    'cantidad' => $venta->cantidad,
+                    'articulo_id' => $venta->id,
+                    'credito_id' => $credito->id
+                ]);
+                $articulo = Articulo::find($venta->id);
+                $articulo->fill(['cantidad' => ($articulo->cantidad - $venta->cantidad)]);
+                $articulo->update();
+            }
+            $request->session()->forget(['cliente_id', 'articulos']);
+            return redirect('creditos');
+        }
+    }
+
+    public function cancelar(Request $request)
+    {
+        $request->session()->forget(['cliente_id', 'articulos']);
+        return redirect('creditos');   
+    }
+
     public function cliente($id)
     {
-        $cliente = \App\Cliente::find($id);
+        $cliente = Cliente::find($id);
         return $cliente;
     }
 
@@ -24,7 +61,7 @@ class CreditoController extends Controller
         $articulos = [];
         if ($session) {
             foreach ($session as $data) {
-                $articulo = \App\Articulo::find($data['id']);
+                $articulo = Articulo::find($data['id']);
                 $articulo->fill(['cantidad' => $data['cantidad']]);
                 $articulos[] = $articulo;
             }
@@ -36,7 +73,7 @@ class CreditoController extends Controller
     {
         if ($request->query('cliente')){
             $query = '%' . $request->query('cliente') . '%';
-            $clientes = \App\Cliente::where('cedula', 'ilike', $query)
+            $clientes = Cliente::where('cedula', 'ilike', $query)
             ->orWhere('nombre', 'like', $query)
             ->orWhere('apellido', 'like', $query)
             ->orderBy('id', 'asc')->get();
@@ -69,7 +106,7 @@ class CreditoController extends Controller
     {
         if ($request->query('art')){
             $query = '%' . $request->query('art') . '%';
-            $result = \App\Articulo::where('descripcion', 'ilike', $query)
+            $result = Articulo::where('descripcion', 'ilike', $query)
             ->orderBy('id', 'asc')->get();
             if (count($result) > 1) {
                 $cliente = $this->cliente($request->session()->get('cliente_id'));
@@ -87,7 +124,7 @@ class CreditoController extends Controller
 
     public function seleccionarArticulo(Request $request, $id)
     {
-        $articulo = \App\Articulo::find($id);
+        $articulo = Articulo::find($id);
         $cliente = $this->cliente($request->session()->get('cliente_id'));
         $articulos = $this->articulos($request->session()->get('articulos'));
         return view('creditos.index', compact('cliente', 'articulos', 'articulo'));
