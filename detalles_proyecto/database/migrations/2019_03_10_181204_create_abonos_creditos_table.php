@@ -18,6 +18,7 @@ class CreateAbonosCreditosTable extends Migration
             $table->integer('abono');
             $table->integer('credito_id');
             $table->dateTime('fecha')->default(now());
+            $table->foreign('credito_id')->references('id')->on('creditos');
         });
     }
 

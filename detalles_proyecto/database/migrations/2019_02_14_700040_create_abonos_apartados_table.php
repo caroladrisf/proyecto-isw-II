@@ -18,6 +18,7 @@ class CreateAbonosApartadosTable extends Migration
             $table->integer('abono');
             $table->integer('apartado_id');
             $table->dateTime('fecha')->default(now());
+            $table->foreign('apartado_id')->references('id')->on('apartados');
         });
     }
 
