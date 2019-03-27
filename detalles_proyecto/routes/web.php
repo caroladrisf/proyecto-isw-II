@@ -54,4 +54,9 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/apartados/articulos/{id}', 'ApartadoController@asignarArticulo');
     Route::delete('/apartados/articulos/{id}', 'ApartadoController@quitarArticulo');
 
+    // Rutas de abonos
+    Route::get('/abonos', function () {
+        return view('abonos.cliente');
+    });
+
 });
