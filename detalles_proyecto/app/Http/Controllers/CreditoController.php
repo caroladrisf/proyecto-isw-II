@@ -74,8 +74,7 @@ class CreditoController extends Controller
         if ($request->query('cliente')){
             $query = '%' . $request->query('cliente') . '%';
             $clientes = Cliente::where('cedula', 'ilike', $query)
-            ->orWhere('nombre', 'like', $query)
-            ->orWhere('apellido', 'like', $query)
+            ->orWhere('nombre', 'ilike', $query)
             ->orderBy('id', 'asc')->get();
             if (count($clientes) > 1) {
                 $articulos = $this->articulos($request->session()->get('articulos'));

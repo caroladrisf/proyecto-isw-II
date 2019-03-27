@@ -24,12 +24,8 @@
                         <input type="text" value="{{ old('cedula') }}" class="form-control" placeholder="Cédula" name="cedula">
                     </div>
                     <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" value="{{ old('nombre') }}" class="form-control" placeholder="Nombre" name="nombre">
-                    </div>
-                    <div class="form-group">
-                        <label>Apellido</label>
-                        <input type="text" value="{{ old('apellido') }}" class="form-control" placeholder="Apellido" name="apellido">
+                        <label>Nombre completo</label>
+                        <input type="text" value="{{ old('nombre') }}" class="form-control" placeholder="Nombre completo" name="nombre">
                     </div>
                     <div class="form-group">
                         <label>Correo</label>

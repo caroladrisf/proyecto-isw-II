@@ -16,7 +16,6 @@ class Cliente extends Model
     protected $fillable = [
         'cedula',
         'nombre',
-        'apellido',
         'correo',
         'telefono'
     ];

@@ -17,7 +17,6 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->text('cedula')->nullable();
             $table->text('nombre');
-            $table->text('apellido')->nullable();
             $table->text('correo')->nullable();
             $table->text('telefono')->nullable();
             $table->timestamps();

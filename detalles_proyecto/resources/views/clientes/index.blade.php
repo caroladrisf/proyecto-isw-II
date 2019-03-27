@@ -26,7 +26,6 @@
                     <tr class="text-center">
                         <th scope="col">CÉDULA</th>
                         <th scope="col">NOMBRE</th>
-                        <th scope="col">APELLIDO</th>
                         <th scope="col">CORREO</th>
                         <th scope="col">TELÉFONO</th>
                         <th scope="col">OPCIONES <i class="fas fa-cog"></i></th>
@@ -37,7 +36,6 @@
                     <tr class="text-center">
                         <td>{{$cliente->cedula}}</td>
                         <td>{{$cliente->nombre}}</td>
-                        <td>{{$cliente->apellido}}</td>
                         <td>{{$cliente->correo}}</td>
                         <td>{{$cliente->telefono}}</td>
                         <td>

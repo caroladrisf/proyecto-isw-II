@@ -30,7 +30,7 @@
                             <div class="list-group mr-5">
                                 @foreach ($clientes as $c)
                                 <a href="{{ action('CreditoController@asignarCliente', $c->id) }}" class="list-group-item list-group-item-action">
-                                    {{ $c->cedula }} - {{ $c->nombre. ' ' . $c->apellido }}</a>
+                                    {{ $c->cedula }} - {{ $c->nombre }}</a>
                                 @endforeach
                             </div>
                             @endisset
@@ -48,7 +48,7 @@
                             @isset($cliente)
                             <tr>
                                 <td>{{ $cliente->cedula }}</td>
-                                <td>{{ $cliente->nombre . ' ' . $cliente->apellido }}</td>
+                                <td>{{ $cliente->nombre }}</td>
                             </tr>
                             @endisset
                             <tr>

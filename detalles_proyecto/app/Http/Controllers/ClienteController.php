@@ -17,9 +17,8 @@ class ClienteController extends Controller
     {
         $query = '%' . $request->query('buscar') . '%';
         if ($query) {
-            $clientes = Cliente::where('cedula', 'like', $query)
-                                ->orWhere('nombre', 'like', $query)
-                                ->orWhere('apellido', 'like', $query)
+            $clientes = Cliente::where('cedula', 'ilike', $query)
+                                ->orWhere('nombre', 'ilike', $query)
                                 ->orderBy('id', 'asc')->paginate(6);
         } else {
             $clientes = Cliente::orderBy('id', 'asc')->paginate(10);
