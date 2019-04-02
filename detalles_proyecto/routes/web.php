@@ -55,8 +55,12 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/apartados/articulos/{id}', 'ApartadoController@quitarArticulo');
 
     // Rutas de abonos
-    Route::get('/abonos', function () {
-        return view('abonos.cliente');
-    });
+    Route::get('/abonos', 'AbonoController@index');
+    Route::get('/abonos/clientes', 'AbonoController@buscarClientes');
+    Route::get('/abonos/clientes/{cliente}', 'AbonoController@buscarCuentas');
+    Route::get('/abonos/clientes/{cliente}/creditos/{credito}', 'AbonoController@abonarCredito');
+    Route::post('/abonos/clientes/{cliente}/creditos/{credito}', 'AbonoController@guardarAbonoCredito');
+    Route::get('/abonos/clientes/{cliente}/apartados/{apartado}', 'AbonoController@abonarApartado');
+    Route::post('/abonos/clientes/{cliente}/apartados/{apartado}', 'AbonoController@guardarAbonoApartado');
 
 });

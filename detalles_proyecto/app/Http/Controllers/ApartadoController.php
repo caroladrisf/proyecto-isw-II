@@ -76,7 +76,6 @@ class ApartadoController extends Controller
             $query = '%' . $request->query('cliente') . '%';
             $clientes = Cliente::where('cedula', 'ilike', $query)
             ->orWhere('nombre', 'like', $query)
-            ->orWhere('apellido', 'like', $query)
             ->orderBy('id', 'asc')->get();
             if (count($clientes) > 1) {
                 $articulos = $this->articulos($request->session()->get('articulos'));

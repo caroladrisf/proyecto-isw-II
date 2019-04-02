@@ -2,13 +2,13 @@
 @section('content')
 <ul class="nav nav-tabs nav-fill">
     <li class="nav-item active show">
-        <a class="nav-link" data-toggle="tab" href="#cliente">Cliente</a>
+        <a class="nav-link" data-toggle="tab" href="">Cliente</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="abonar-cuenta.html">Cuenta</a>
+        <a class="nav-link" data-toggle="tab" href="">Cuenta</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="abonar.html">Abono</a>
+        <a class="nav-link" data-toggle="tab" href="">Abono</a>
     </li>
 </ul>
 <div class="container mt-5" id="custom">
@@ -30,7 +30,7 @@
             @isset($clientes)
             <div class="list-group mr-5">
                 @foreach ($clientes as $c)
-                <a href="{{ action('CreditoController@asignarCliente', $c->id) }}"
+                <a href="{{ action('AbonoController@buscarCuentas', $c->id) }}"
                     class="list-group-item list-group-item-action">
                     {{ $c->cedula }} - {{ $c->nombre }}</a>
                 @endforeach

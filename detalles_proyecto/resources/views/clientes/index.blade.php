@@ -31,8 +31,8 @@
                         <th scope="col">OPCIONES <i class="fas fa-cog"></i></th>
                     </tr>
                 </thead>
-                @foreach($clientes as $cliente)
                 <tbody>
+                    @foreach($clientes as $cliente)
                     <tr class="text-center">
                         <td>{{$cliente->cedula}}</td>
                         <td>{{$cliente->nombre}}</td>
@@ -50,8 +50,8 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
         </div>
     </div>
