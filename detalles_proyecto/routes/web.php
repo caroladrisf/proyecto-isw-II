@@ -26,6 +26,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resources([
         'articulos' => 'ArticuloController',
         'clientes'  => 'ClienteController',
+        'proveedores' => 'ProveedorController',
         'admin'     => 'AdminController',
         'debitos'   => 'VentaDebitoController'
     ]);
