@@ -34,7 +34,7 @@
                     <a class="nav-link" href="{{ url('/abonos') }}">Abonos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">Proveedores</a>
+                    <a class="nav-link" href="{{ url('/proveedores') }}">Proveedores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/create') }}">Registro</a>
