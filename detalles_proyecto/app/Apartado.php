@@ -17,6 +17,7 @@ class Apartado extends Model
     protected $fillable = [
         'cliente_id',
         'monto_total',
+        'saldo',
         'fecha'
     ];
 }

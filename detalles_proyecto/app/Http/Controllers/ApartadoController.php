@@ -27,6 +27,7 @@ class ApartadoController extends Controller
         foreach ($articulos as $articulo) {
             $apartado->monto_total += $articulo->cantidad * $articulo->precio_venta;
         }
+        $apartado->saldo = $apartado->monto_total;
         $apartado->save();
         if ($apartado->id) {
             foreach ($articulos as $venta) {

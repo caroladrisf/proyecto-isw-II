@@ -27,6 +27,7 @@ class CreditoController extends Controller
         foreach ($articulos as $articulo) {
             $credito->monto_total += $articulo->cantidad * $articulo->precio_venta;
         }
+        $credito->saldo = $credito->monto_total;
         $credito->save();
         if ($credito->id) {
             foreach ($articulos as $venta) {
