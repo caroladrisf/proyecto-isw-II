@@ -16,6 +16,7 @@ class Debito extends Model
      */
     protected $fillable = [
         'cliente_id',
+        'nombre',
         'monto_total',
         'fecha'
     ];

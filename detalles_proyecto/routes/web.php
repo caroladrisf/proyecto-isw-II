@@ -27,8 +27,7 @@ Route::middleware(['admin'])->group(function () {
         'articulos' => 'ArticuloController',
         'clientes'  => 'ClienteController',
         'proveedores' => 'ProveedorController',
-        'admin'     => 'AdminController',
-        'debitos'   => 'VentaDebitoController'
+        'admin'     => 'AdminController'
     ]);
 
     // Rutas de ventas a crédito
@@ -42,6 +41,18 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/creditos/articulos/{id}', 'CreditoController@seleccionarArticulo');
     Route::post('/creditos/articulos/{id}', 'CreditoController@asignarArticulo');
     Route::delete('/creditos/articulos/{id}', 'CreditoController@quitarArticulo');
+    
+    // Rutas de ventas a débito
+    Route::get('/debitos', 'DebitoController@create');
+    Route::post('/debitos', 'DebitoController@store');
+    Route::delete('/debitos', 'DebitoController@cancelar');
+    Route::get('/debitos/clientes', 'DebitoController@buscarClientes');
+    Route::get('/debitos/clientes/{id}', 'DebitoController@asignarCliente');
+    Route::delete('/debitos/cliente', 'DebitoController@quitarCliente');
+    Route::get('/debitos/articulos', 'DebitoController@buscarArticulos');
+    Route::get('/debitos/articulos/{id}', 'DebitoController@seleccionarArticulo');
+    Route::post('/debitos/articulos/{id}', 'DebitoController@asignarArticulo');
+    Route::delete('/debitos/articulos/{id}', 'DebitoController@quitarArticulo');
 
     // Rutas de apartados
     Route::get('/apartados', 'ApartadoController@create');
