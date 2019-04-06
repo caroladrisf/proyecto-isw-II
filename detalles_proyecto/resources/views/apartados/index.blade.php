@@ -6,6 +6,15 @@
             <h5>Apartado</h5>
         </div>
         <div class="card-body border-dark">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <div class="row mb-3">
                 <div class="col-md-6">
                     <h6 class="ml-2">Cliente</h6>
