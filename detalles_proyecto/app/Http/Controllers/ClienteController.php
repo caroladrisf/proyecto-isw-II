@@ -92,7 +92,7 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        Cliente::destroy($cliente->id);
+        $cliente->delete();
         return redirect('clientes');
     }
 }
