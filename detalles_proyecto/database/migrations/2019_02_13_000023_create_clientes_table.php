@@ -19,6 +19,7 @@ class CreateClientesTable extends Migration
             $table->text('nombre');
             $table->text('correo')->nullable();
             $table->text('telefono')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

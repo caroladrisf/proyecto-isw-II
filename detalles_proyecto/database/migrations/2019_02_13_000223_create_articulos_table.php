@@ -19,6 +19,7 @@ class CreateArticulosTable extends Migration
             $table->integer('cantidad');
             $table->double('precio_compra');
             $table->double('precio_venta');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
