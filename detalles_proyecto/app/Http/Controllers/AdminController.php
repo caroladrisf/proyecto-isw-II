@@ -37,15 +37,10 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $admin = new Admin();
-        $rol_1= $request->input('rol-1') ?? '';
-        $rol_2= $request->input('rol-2') ?? '';
-        $rol_3= $request->input('rol-3') ?? '';
-        $rol_4= $request->input('rol-4') ?? '';
-        $permisos = $rol_1.','.$rol_2.','.$rol_3.','.$rol_4;
         $admin->fill($request->all());
         $admin->fill([
             'contrasena' => md5($request->input('contrasena')),
-            'permisos' => $permisos
+            'permisos' => '1,2,3,4'
         ]);
         $admin->save();
         return redirect('/');

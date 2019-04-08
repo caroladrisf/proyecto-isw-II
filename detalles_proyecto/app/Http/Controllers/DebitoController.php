@@ -39,7 +39,6 @@ class DebitoController extends Controller
         foreach ($articulos as $articulo) {
             $debito->monto_total += $articulo->cantidad * $articulo->precio_venta;
         }
-        $debito->saldo = $debito->monto_total;
         $debito->save();
         if ($debito->id) {
             foreach ($articulos as $venta) {
@@ -118,7 +117,7 @@ class DebitoController extends Controller
     {
         if ($request->query('art')){
             $query = '%' . $request->query('art') . '%';
-            $result = Articulo::where('descripcion', 'ilike', $query)
+            $result = Articulo::where('descripcion', 'ilike', $query)->where('cantidad', '>', 0)
             ->orderBy('id', 'asc')->get();
             if (count($result) > 1) {
                 $cliente = $this->cliente($request->session()->get('cliente_id'));
@@ -127,7 +126,8 @@ class DebitoController extends Controller
             } else if (count($result) == 1) {
                 return redirect("/debitos/articulos/{$result[0]->id}");
             } else {
-                return redirect('debitos')->with('articulos_error', 'Ningún artículo registrado coincide con la busqueda');
+                return redirect('debitos')->with('articulos_error', 'Ningún artículo registrado coincide con la busqueda o 
+                No hay más cantidad de este artículo en inventario');
             }
         } else {
             return redirect('debitos');

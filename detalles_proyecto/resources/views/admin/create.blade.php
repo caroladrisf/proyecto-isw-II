@@ -34,13 +34,6 @@
                         <label>Repita Contraseña</label>
                         <input type="password" name="re-password" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label>Permisos de Administrador</label> <br>
-                        <input type="checkbox" name="rol-1" value="1">&nbspAdministrador (Acceso total) <br>
-                        <input type="checkbox" name="rol-2" value="2">&nbspSolo clientes <br>
-                        <input type="checkbox" name="rol-3" value="3">&nbspSolo inventarios <br>
-                        <input type="checkbox" name="rol-4" value="4">&nbspSolo ventas <br>
-                    </div>
                     <div class="text-center w-50 mx-auto pt-2">
                         <button type="submit" class="btn btn-primary btn-block"><strong>Agregar</strong></button>
                         <a href="{{ url('/') }}" class="btn btn-secondary btn-block"><strong>Cancelar</strong></a>
