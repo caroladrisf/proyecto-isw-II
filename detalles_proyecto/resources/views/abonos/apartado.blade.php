@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-sm-12 pl-2 pt-2" style="background-color: #26a69a;">
-            <h6 class="text-white text-center">Información del crédito</h6>
+            <h6 class="text-white text-center">Información del apartado</h6>
         </div>
         <div class="col-sm-6">
             @isset($cliente)
@@ -36,7 +36,7 @@
             @endisset
         </div>
         <div class="col-sm-6">
-            @isset($credito)
+            @isset($apartado)
             <table class="table table-borderless table-sm">
                 <thead>
                     <tr>
@@ -46,8 +46,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>₡{{ $credito->monto_total }}</td>
-                        <td>₡{{ $credito->saldo }}</td>
+                        <td>₡{{ $apartado->monto_total }}</td>
+                        <td>₡{{ $apartado->saldo }}</td>
                     </tr>
                 <tbody>
             </table>
@@ -94,7 +94,7 @@
                 <p>{{ session('abono_msg') }}</p>
             </div>
             @endif
-            <form action="{{ action('AbonoController@guardarAbonoCredito', [$cliente->id, $credito->id]) }}"
+            <form action="{{ action('AbonoController@guardarAbonoApartado', [$cliente->id, $apartado->id]) }}"
                 method="post" class="p-2">
                 @csrf
                 <div class="form-group">
