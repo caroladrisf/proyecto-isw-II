@@ -158,4 +158,15 @@ class ApartadoController extends Controller
         }
         return redirect('apartados');
     }
+
+    public function eliminar($id)
+    {
+        $articulos = VentaApartado::where('apartado_id', $id)->get();
+        foreach ($articulos as $articulo) {
+            Articulo::find($articulo->articulo_id)->increment('cantidad', $articulo->cantidad);
+            VentaApartado::destroy($articulo->id);
+        }
+        Apartado::destroy($id);
+        return redirect('/');
+    }
 }

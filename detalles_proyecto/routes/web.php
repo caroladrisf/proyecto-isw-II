@@ -18,9 +18,7 @@ Route::get('/logout', 'AdminController@logout')->name('logout');
 
 Route::middleware(['admin'])->group(function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', 'DashboardController');
     
     // Rutas de los CRUDs
     Route::resources([
@@ -58,6 +56,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/apartados', 'ApartadoController@create');
     Route::post('/apartados', 'ApartadoController@store');
     Route::delete('/apartados', 'ApartadoController@cancelar');
+    Route::delete('/apartados/{id}', 'ApartadoController@eliminar');
     Route::get('/apartados/clientes', 'ApartadoController@buscarClientes');
     Route::get('/apartados/clientes/{id}', 'ApartadoController@asignarCliente');
     Route::delete('/apartados/cliente', 'ApartadoController@quitarCliente');
