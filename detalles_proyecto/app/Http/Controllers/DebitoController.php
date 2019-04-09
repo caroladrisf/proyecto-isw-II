@@ -24,6 +24,14 @@ class DebitoController extends Controller
     }
 
     /**
+     * Show the registros view
+     */
+    public function registros()
+    {
+        return view('debitos.registros');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

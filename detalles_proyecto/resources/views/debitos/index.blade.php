@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    <div class="row">
+        <div class="col-sm-10">
+        </div>
+        <div class="col-sm-2">
+            <a href="{{ url('debitos/registros') }}" class="btn btn-success btn-block float-right"><strong>Registro de ventas</strong></a> 
+        </div>
+    </div>
+</div>
+<div class="container">
     <div class="card mx-auto " id="custom">
         <div class="card-header text-center">
             <h5>Débito</h5>
