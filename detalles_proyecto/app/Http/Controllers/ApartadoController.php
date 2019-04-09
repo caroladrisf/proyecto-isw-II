@@ -116,7 +116,7 @@ class ApartadoController extends Controller
     {
         if ($request->query('art')){
             $query = '%' . $request->query('art') . '%';
-            $result = Articulo::where('descripcion', 'ilike', $query)
+            $result = Articulo::where('descripcion', 'ilike', $query)->where('cantidad', '>', 0)
             ->orderBy('id', 'asc')->get();
             if (count($result) > 1) {
                 $cliente = $this->cliente($request->session()->get('cliente_id'));

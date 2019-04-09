@@ -77,10 +77,10 @@
                     <h6 class="ml-2">Artículo</h6>
                     <form method="GET" action="{{ url('/creditos/articulos') }}">
                         <div class="form-group">
-                            @if (session('articulo_error'))
+                            @if (session('articulos_error'))
                             <div class="alert alert-dismissible alert-warning">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <p>{{ session('articulo_error') }}</p>
+                                <p>{{ session('articulos_error') }}</p>
                             </div>
                             @endif
                             <div class="input-group">
