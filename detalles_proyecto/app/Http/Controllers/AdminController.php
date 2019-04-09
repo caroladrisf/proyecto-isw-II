@@ -39,8 +39,7 @@ class AdminController extends Controller
         $admin = new Admin();
         $admin->fill($request->all());
         $admin->fill([
-            'contrasena' => md5($request->input('contrasena')),
-            'permisos' => '1,2,3,4'
+            'contrasena' => md5($request->input('contrasena'))
         ]);
         $admin->save();
         return redirect('/');

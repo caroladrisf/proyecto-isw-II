@@ -18,7 +18,6 @@ class Admin extends Model
         'apellido',
         'correo',
         'usuario',
-        'contrasena',
-        'permisos'
+        'contrasena'
     ];
 }

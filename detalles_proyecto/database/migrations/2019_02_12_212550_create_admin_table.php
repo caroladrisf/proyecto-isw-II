@@ -20,7 +20,6 @@ class CreateAdminTable extends Migration
             $table->text('correo');
             $table->text('usuario');
             $table->text('contrasena');
-            $table->text('permisos');
             $table->timestamps();
         });
     }
