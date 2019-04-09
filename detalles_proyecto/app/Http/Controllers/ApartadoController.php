@@ -116,7 +116,7 @@ class ApartadoController extends Controller
     {
         if ($request->query('art')){
             $query = '%' . $request->query('art') . '%';
-            $result = Articulo::where('descripcion', 'ilike', $query)
+            $result = Articulo::where('descripcion', 'ilike', $query)->where('cantidad', '>', 0)
             ->orderBy('id', 'asc')->get();
             if (count($result) > 1) {
                 $cliente = $this->cliente($request->session()->get('cliente_id'));
@@ -157,5 +157,16 @@ class ApartadoController extends Controller
             }
         }
         return redirect('apartados');
+    }
+
+    public function eliminar($id)
+    {
+        $articulos = VentaApartado::where('apartado_id', $id)->get();
+        foreach ($articulos as $articulo) {
+            Articulo::find($articulo->articulo_id)->increment('cantidad', $articulo->cantidad);
+            VentaApartado::destroy($articulo->id);
+        }
+        Apartado::destroy($id);
+        return redirect('/');
     }
 }
