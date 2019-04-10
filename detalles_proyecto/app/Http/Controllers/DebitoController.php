@@ -39,6 +39,16 @@ class DebitoController extends Controller
      */
     public function store(Request $request)
     {
+        $errores = [];
+        if (empty($request->session()->get('cliente_id'))) {
+            $errores[] = 'No se ha seleccionado el cliente';
+        }
+        if (empty($request->session()->get('articulos'))) {
+            $errores[] = 'No se ha seleccionado ningún articulo';
+        }
+        if (count($errores) > 0) {
+            return back()->withErrors($errores);
+        }
         $articulos = $this->articulos($request->session()->get('articulos'));
         $debito = new Debito();
         $debito->fecha = now();

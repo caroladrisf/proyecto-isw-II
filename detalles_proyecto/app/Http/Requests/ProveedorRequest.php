@@ -24,7 +24,8 @@ class ProveedorRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required'
+            'nombre' => 'required',
+            'correo' => 'nullable|email'
         ];
     }
 
@@ -37,6 +38,7 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Escriba el nombre del proveedor',
+            'correo.email' => 'El correo ingresado no es válido'
         ];
     }
 }

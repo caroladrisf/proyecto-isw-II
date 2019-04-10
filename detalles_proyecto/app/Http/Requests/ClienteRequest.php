@@ -24,7 +24,8 @@ class ClienteRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required'
+            'nombre' => 'required',
+            'correo' => 'nullable|email'
         ];
     }
 
@@ -37,6 +38,7 @@ class ClienteRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Escriba el nombre del cliente',
+            'correo.email' => 'El correo ingresado no es válido'
         ];
     }
 }
