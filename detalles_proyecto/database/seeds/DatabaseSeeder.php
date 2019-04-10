@@ -14,12 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('admin')->insert([
-            'nombre' => Str::random(10),
-            'apellido' => Str::random(10),
+            'nombre' => 'Marcela',
+            'apellido' => 'Vargas Espinoza',
             'correo' => 'admin@gmail.com',
             'usuario' => 'admin',
-            'contrasena' => md5('admin'),
-            'permisos' => '1,2,3,4',
+            'contrasena' => md5('admin')
         ]);
     }
 }
