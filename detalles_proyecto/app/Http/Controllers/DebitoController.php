@@ -93,13 +93,46 @@ class DebitoController extends Controller
         if($request->query('busqueda')){
             $busqueda = $request->query('busqueda');
             $query = '%' . $busqueda . '%';
-            $clientes = Cliente::where('cedula', 'ilike', $query)
-            ->orWhere('nombre', 'ilike', $query)
-            ->orderBy('id', 'asc')->get();
             $fechas = Debito::where('fecha', 'ilike', $query)
             ->orderBy('id', 'asc')->get();
-            //dd($fechas);
-            dd($clientes);
+            if(count($fechas) >= 1){
+                return view('debitos.registros', compact('fechas'));
+            } else {
+                $err_msg = "No hay coincidencias con la fecha '" . $request->query('busqueda') . "'";
+                return redirect('debitos/registros')->with('busqueda_error', $err_msg);
+            }
+        } else {
+            return redirect('debitos/registros')->with('busqueda_error', 'Digita una fecha');
+        }
+    }
+
+    public function detallesVenta(Request $request){
+        if($request->query('id_de')){
+            $debito_id = $request->query('id_de');
+            $ventas = VentaDebito::where('debito_id', 'ilike', $debito_id)
+            ->orderBy('id', 'asc')->get();
+            $articulos = [];
+            if($ventas){
+                foreach ($ventas as $venta) {
+                    array_push($articulos, $venta->articulo_id);
+                }
+            }
+            $arts = [];
+            if($articulos){
+                foreach ($articulos as $articulo) {
+                    $art = Articulo::where('id', '=', $articulo)
+                    ->orderBy('id', 'asc')->get();
+                    array_push($arts, $art);
+                }
+            }
+            $detalles = [];
+            if($arts){
+                for ($i=0; $i < count($arts); $i++) { 
+                    $articulo = $arts[$i][0]->descripcion;
+                    array_push($detalles, $articulo);
+                }
+            }
+            return view('debitos.detalles', compact('ventas', 'detalles'));
         }
     }
 
