@@ -89,6 +89,20 @@ class DebitoController extends Controller
         return $articulos;
     }
 
+    public function busquedaRegistro(Request $request){
+        if($request->query('busqueda')){
+            $busqueda = $request->query('busqueda');
+            $query = '%' . $busqueda . '%';
+            $clientes = Cliente::where('cedula', 'ilike', $query)
+            ->orWhere('nombre', 'ilike', $query)
+            ->orderBy('id', 'asc')->get();
+            $fechas = Debito::where('fecha', 'ilike', $query)
+            ->orderBy('id', 'asc')->get();
+            //dd($fechas);
+            dd($clientes);
+        }
+    }
+
     public function buscarClientes(Request $request)
     {
         if ($request->query('cliente')){

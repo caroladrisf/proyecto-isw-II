@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             'correo' => 'admin@gmail.com',
             'usuario' => 'admin',
             'contrasena' => md5('admin'),
-            'permisos' => '1,2,3,4',
         ]);
     }
 }
