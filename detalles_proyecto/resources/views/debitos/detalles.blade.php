@@ -22,18 +22,18 @@
             </div>
             <div class="card-body">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Cantidad de articulo comprado</th>
-                            <th>Monto Unitario</th>
-                            <th>Monto total por articulo</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td>{{$cantidades[$i]}}</td>
-                            <td>{{$detalles[$i]->precio_venta}}</td>
-                            <td>{{($detalles[$i]->precio_venta*$cantidades[$i])}}</td>
+                            <th>Cantidad de articulo comprado:</th>
+                            <td class="pl-2">{{$cantidades[$i]}}</td>
+                        </tr>
+                        <tr>
+                            <th>Monto Unitario:</th>
+                            <td class="pl-2">{{$detalles[$i]->precio_venta}}</td>
+                        </tr>
+                        <tr>
+                            <th>Monto total por articulo:</th>
+                            <td class="pl-2">{{($detalles[$i]->precio_venta*$cantidades[$i])}}</td>
                         </tr>
                     </tbody>
                 </table>
