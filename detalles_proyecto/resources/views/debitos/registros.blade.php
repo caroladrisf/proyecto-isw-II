@@ -11,8 +11,9 @@
                 <div class="col-sm-12">
                     <h6 class="ml-2">Realiza tú búsqueda por fecha de venta</h6>
                     <form method="GET" action="{{'/debitos/registros/busqueda'}}">
+                        <label>Si deseas solo ingresa un número o una fecha completa</label>
                         <div class="input-group">
-                        <input type="text" name="busqueda" class="form-control">
+                        <input type="text" placeholder="Ejemplo: 2019-04-10" name="busqueda" class="form-control">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                             </div>
@@ -44,6 +45,15 @@
                     </div>
                     @endisset
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="float-right">
+                <a href="{{ url('debitos') }}" class="btn btn-secondary text-white">Volver <i class="fas fa-undo-alt ml-2"></i></a>
             </div>
         </div>
     </div>
