@@ -128,7 +128,7 @@ class DebitoController extends Controller
             $detalles = [];
             if($arts){
                 for ($i=0; $i < count($arts); $i++) { 
-                    $articulo = $arts[$i][0]->descripcion;
+                    $articulo = $arts[$i][0];
                     array_push($detalles, $articulo);
                 }
             }

@@ -29,12 +29,12 @@
                     @isset($fechas)
                     <div class="row ml-1 mr-1">
                         @foreach ($fechas as $fecha)
-                        <div class="card ml-1 mr-1" style="width: 18rem;">
+                        <div class="card ml-1 mr-1 mb-4" style="width: 18rem;">
                             <div class="card-header bg-info">
                             <h5 class="card-title">Fecha: {{$fecha->fecha}}</h5>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">Monto de venta: {{$fecha->monto_total}}</p>
+                                <p class="card-text">La venta fue realizada por un monto de: {{$fecha->monto_total}}</p>
                                 <form method="GET" action="{{'/debitos/detalles'}}">
                                     <button name="id_de" value="{{$fecha->id}}" class="btn btn-success" type="submit">Mostrar detalles</button>
                                 </form>
