@@ -43,6 +43,8 @@ Route::middleware(['admin'])->group(function () {
     // Rutas de ventas a débito
     Route::get('/debitos', 'DebitoController@create');
     Route::get('/debitos/registros', 'DebitoController@registros');
+    Route::get('/debitos/registros/busqueda', 'DebitoController@busquedaRegistro');
+    Route::get('/debitos/detalles', 'DebitoController@detallesVenta');
     Route::post('/debitos', 'DebitoController@store');
     Route::delete('/debitos', 'DebitoController@cancelar');
     Route::get('/debitos/clientes', 'DebitoController@buscarClientes');
